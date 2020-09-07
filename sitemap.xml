@@ -13,7 +13,17 @@
   </url>
   
   <url>
-    <loc>http://adsteen.github.io/week02/hw02/</loc>
+    <loc>http://adsteen.github.io/homework/hw02/</loc>
+    <lastmod>2020-09-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://adsteen.github.io/homework/</loc>
+    <lastmod>2020-09-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://adsteen.github.io/post/</loc>
     <lastmod>2020-09-06T00:00:00+00:00</lastmod>
   </url>
   
@@ -23,7 +33,7 @@
   </url>
   
   <url>
-    <loc>http://adsteen.github.io/week02/</loc>
+    <loc>http://adsteen.github.io/post/hw02/</loc>
     <lastmod>2020-09-06T00:00:00+00:00</lastmod>
   </url>
   

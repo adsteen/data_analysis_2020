@@ -13,11 +13,20 @@
     
     <item>
       <title>Homework 2</title>
-      <link>http://adsteen.github.io/week02/hw02/</link>
+      <link>http://adsteen.github.io/homework/hw02/</link>
       <pubDate>Sun, 06 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://adsteen.github.io/week02/hw02/</guid>
+      <guid>http://adsteen.github.io/homework/hw02/</guid>
       <description>&lt;p&gt;This homework, as well as homework 3, is due Wednesday Sept 16. Lecture notes coming ASAP.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>test post</title>
+      <link>http://adsteen.github.io/post/hw02/</link>
+      <pubDate>Sun, 06 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://adsteen.github.io/post/hw02/</guid>
+      <description>This is a test post</description>
     </item>
     
   </channel>
