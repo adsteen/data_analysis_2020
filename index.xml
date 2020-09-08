@@ -12,12 +12,12 @@
     
     
     <item>
-      <title>Notes</title>
-      <link>/data_analysis_2020/notes/</link>
-      <pubDate>Tue, 08 Sep 2020 11:12:21 -0400</pubDate>
+      <title>Getting help in R</title>
+      <link>/data_analysis_2020/notes/help/</link>
+      <pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>/data_analysis_2020/notes/</guid>
-      <description></description>
+      <guid>/data_analysis_2020/notes/help/</guid>
+      <description>Help on specific functions Every function in R has a an associated documentaion file. In RStudio, typing the name of the function, prefaced by ?, will pull up the documentation for that function. For instance, try ?sum[On my machine, RStudio sometimes gets over-excited about auto-completing and tries to fill in the name of a longer function. Just type backspace when that happens.] (you don’t need the ()): in the lower-right-hand panel of RStudio you’ll see a documentation displayed.</description>
     </item>
     
     <item>

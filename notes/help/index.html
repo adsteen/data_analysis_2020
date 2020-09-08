@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Getting help in R - Reproducible Data Analysis</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Getting help in R" />
+<meta property="og:description" content="Help on specific functions Every function in R has a an associated documentaion file. In RStudio, typing the name of the function, prefaced by ?, will pull up the documentation for that function. For instance, try ?sum[On my machine, RStudio sometimes gets over-excited about auto-completing and tries to fill in the name of a longer function. Just type backspace when that happens.] (you don’t need the ()): in the lower-right-hand panel of RStudio you’ll see a documentation displayed." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/data_analysis_2020/notes/help/" />
+<meta property="article:published_time" content="2020-09-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-09-08T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Getting help in R">
+<meta itemprop="description" content="Help on specific functions Every function in R has a an associated documentaion file. In RStudio, typing the name of the function, prefaced by ?, will pull up the documentation for that function. For instance, try ?sum[On my machine, RStudio sometimes gets over-excited about auto-completing and tries to fill in the name of a longer function. Just type backspace when that happens.] (you don’t need the ()): in the lower-right-hand panel of RStudio you’ll see a documentation displayed.">
+<meta itemprop="datePublished" content="2020-09-08T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-09-08T00:00:00+00:00" />
+<meta itemprop="wordCount" content="867">
+
+
+
+<meta itemprop="keywords" content="basics," />
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Getting help in R"/>
+<meta name="twitter:description" content="Help on specific functions Every function in R has a an associated documentaion file. In RStudio, typing the name of the function, prefaced by ?, will pull up the documentation for that function. For instance, try ?sum[On my machine, RStudio sometimes gets over-excited about auto-completing and tries to fill in the name of a longer function. Just type backspace when that happens.] (you don’t need the ()): in the lower-right-hand panel of RStudio you’ll see a documentation displayed."/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/data_analysis_2020/css/style.css">
+	<link rel="stylesheet" href="/data_analysis_2020/css/custom.css">
+
+	<link rel="shortcut icon" href="/data_analysis_2020/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/data_analysis_2020/" title="Reproducible Data Analysis" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/data_analysis_2020/img/svalbard_sky.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Reproducible Data Analysis</div>
+					<div class="logo__tagline">Public site for UT-Knoxville MICR 493/594; GEOL 490/590</div>
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Getting help in R</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Drew Steen</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-08T00:00:00Z">2020-09-08</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/data_analysis_2020/categories/notes/" rel="category">notes</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		
+	</div>
+</div>
+<div class="content post__content clearfix">
+			
+
+
+<div id="help-on-specific-functions" class="section level1">
+<h1>Help on specific functions</h1>
+<p>Every function in R has a an associated documentaion file. In RStudio, typing the name of the function, prefaced by <code>?</code>, will pull up the documentation for that function. For instance, try <code>?sum</code>[On my machine, RStudio sometimes gets over-excited about auto-completing and tries to fill in the name of a longer function. Just type backspace when that happens.] (you don’t need the <code>()</code>): in the lower-right-hand panel of RStudio you’ll see a documentation displayed.</p>
+<div id="parts-of-an-r-documentation-file" class="section level2">
+<h2>Parts of an R documentation file</h2>
+<p>The documentation in R has a very specific format:</p>
+<ul>
+<li><strong>Function name and package</strong> On the upper left is the name of the function, followed by {the package it is in}. Note that R frequently groups documentation for multiple functions, so the function name you see may not be what you actually searched on.</li>
+<li><strong>Title</strong></li>
+<li><strong>Description</strong> aims to provide a plain language description of the function</li>
+<li><strong>Usage</strong> shows how to call the function. The words in the parentheses are <em>arguments</em> that you can pass to the function when you call it. More on what that means <a href="./2020-09-08-What_is_a_function.html">here</a>. Arguments that contain an <code>=</code> indicate a default: for instance, in <code>sum()</code>, <code>na.rm</code> is set to <code>TRUE</code> unless you specify otherwise. When you call a function, you must specify all arguments that don’t have a default value.</li>
+<li><strong>Arguments</strong> A longer description of what each argument is. Generally the documentation will make clear what kind of object each argument should be (a vector? a list?).</li>
+<li><strong>Details</strong> and <strong>Note</strong> often provide useful tidbits of information about the function. If you are having trouble with the function, be sure to read these sections carefully.</li>
+<li><strong>Value</strong> tells you what kind of object the function returns. This is critical to using the result of the function properly.</li>
+<li><strong>Examples</strong> provide sometimes hard-to-understand examples of how use the code.</li>
+</ul>
+</div>
+</div>
+<div id="help-on-packages" class="section level1">
+<h1>Help on packages</h1>
+<p>R has two major sources of documentation for packages. For every package on CRAN, there is a PDF file that contains the formal documentation for each function in it, for instance <a href="https://cran.r-project.org/package=dplyr">here</a>. This can be a useful reference, but is generally not a great way to get a sense of how to use the package.</p>
+<p><strong>Vignettes</strong> provide a practical introduction to using the package. Packages are not required to have a vignette, and some have more than one. You can find any vignettes for a package on the CRAN documentation page for that package. You can also list vignettes using the syntax <code>vignette(package = "package-name")</code> (replace <code>package-name</code> with the actual name of the package, in quotation marks) and then launch the vignette from RStudio using the syntax, for instance <code>vignette(name-of-vignette)</code>.</p>
+</div>
+<div id="help-on-sticky-problems" class="section level1">
+<h1>Help on sticky problems</h1>
+<p>It is exceedingly unlikely that, as a new coder, you are the first person in the world to face any given problem. It is very likely that someone else has faced that problem before and put the solution on the internet. So I frequently find myself googling phrases like <code>R how to add dendrogram to heatmap</code>.</p>
+<div id="confusing-error-messages" class="section level2">
+<h2>Confusing error messages</h2>
+<p>Error messages in R are often difficult to interpret. The message “<a href="https://www.r-bloggers.com/object-of-type-closure-is-not-subsettable/">object of type closure is not subsettable</a>” is infamously common and opaque. When you are confused by an error message,</p>
+<ol style="list-style-type: decimal">
+<li>Be sure to read it. It might seem like gibberish, but you might be able to make some sense of it!</li>
+<li><strong>Google the error message</strong>. Read explanations of what the error means, and how to fix it.</li>
+</ol>
+</div>
+<div id="stack-overflow" class="section level2">
+<h2>Stack Overflow</h2>
+<p><a href="https://www.stackoverflow.com">Stack Overflow</a> is a website for people to ask and answer specific software questions. As of early September 2020, there are <a href="https://stackoverflow.com/questions/tagged/r">more than 360,000 questions</a> about R. Whatever question you have, chances are it has already been answered on Stack Overflow! As you are learning, you will probably not need to ask a new question - the trick to finding your answer is usually finding the correct search term for your question. If you don’t find an answer at first, try phrasing your question in different ways.</p>
+<p>If you do want to ask a question on Stack Overflow - or to anyone else - there is a very specific way to create a good question. An excellent guide to good SO questions is <a href="https://stackoverflow.com/help/minimal-reproducible-example">here</a>. To summarize, your question should be:</p>
+<ul>
+<li><strong>Minimal</strong>: It should have absolutely the least amount of code possible to recreate the problem.</li>
+<li><strong>Reproducible</strong>: The question should contain everything another user needs to recreate the problem, including source data.</li>
+</ul>
+<p>Usually the easiest way to do this is to recreate our problem from the ground up: create a very simple data set from scratch, for instance</p>
+<p><code>my.data &lt;- c(1, 2, 3)</code></p>
+<p>or, if you need something a little more complex, use one of the data sets built into R like <code>mtcars</code> that is present when R starts up. Then, use the simplest amount of code required to re-create your problem.</p>
+<p>This is great advice for asking anyone a software question, not just Stack Overflow. In fact, the best part about it is that simplifying your problem is often the best way to see what the problem is. I haven’t posted a question on Stack Overflow in years, because when I work on creating my minimal, reproducible example, I generally figure out for myself what I was doing wrong!</p>
+</div>
+</div>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/data_analysis_2020/tags/basics/" rel="tag">basics</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/data_analysis_2020/notes/packages/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Intro to packages</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Andrew D. Steen.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/data_analysis_2020/js/menu.js"></script>
+<script src="/data_analysis_2020/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>
