@@ -68,7 +68,9 @@ Strictly speaking, `library()` *attaches* a package to the search path, rather t
 * A name for the set of R packages that **tidyverse** loads, and
 * A philosophy about how best to do data analysis.
 
-We'll talk more about the philosophy and specific packages in **tidyverse** later. The thing to know for now is that **using R with the tidyverse is very different from using base R**. Tidyverse demands a 
+We'll talk more about the philosophy and specific packages in **tidyverse** later. The thing to know for now is that **using R with the tidyverse is very different from using base R**. Tidyverse demands a fundamentally different way of thinking about data analysis. I happen to think that the tidyverse philosophy is a better way of thinking about data analysis, although [not](https://blog.ephorie.de/why-i-dont-use-the-tidyverse) [all](https://github.com/matloff/TidyverseSkeptic) [people](https://towardsdatascience.com/a-thousand-gadgets-my-thoughts-on-the-r-tidyverse-2441d8504433) agree.
+
+Nevertheless, we are going to teach this course using the tidyverse philosophy, which you can learn more about on the [tidyverse website](https://www.tidyverse.org/). So, for this course, your scripts will just about always start with `library(tidyverse)`. 
 
 ### Installing vs loading packages
 
