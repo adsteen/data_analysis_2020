@@ -6,10 +6,29 @@
     <description>Recent content on Reproducible Data Analysis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 06 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/data_analysis_2020/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Notes</title>
+      <link>/data_analysis_2020/notes/</link>
+      <pubDate>Tue, 08 Sep 2020 11:12:21 -0400</pubDate>
+      
+      <guid>/data_analysis_2020/notes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Intro to packages</title>
+      <link>/data_analysis_2020/notes/packages/</link>
+      <pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/notes/packages/</guid>
+      <description>Like all programming languages, R relies on a base language, which is extended by packages. When you installed R, you only installed the base language1. However, base R can only do so much.
+Most of R’s power lies is in its packages. Need to do timeseries forecasting? You’ll want the forecast package. Need to do multivariate statistics? vegan is world-leading. Currently there are more than 16,000 packages listed on CRAN for basically every task you can imagine.</description>
+    </item>
     
     <item>
       <title>Homework 2</title>
@@ -27,6 +46,15 @@
       
       <guid>/data_analysis_2020/post/hw02/</guid>
       <description>This is a test post</description>
+    </item>
+    
+    <item>
+      <title>Intro to R via the tidyverse</title>
+      <link>/data_analysis_2020/notes/intro-to-r-via-the-tidyverse/</link>
+      <pubDate>Thu, 03 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/notes/intro-to-r-via-the-tidyverse/</guid>
+      <description>Placeholder for Introduction to R via the Tidyverse lecture notes</description>
     </item>
     
   </channel>

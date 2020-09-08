@@ -6,10 +6,19 @@
     <description>Recent content in Categories on Reproducible Data Analysis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 06 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 08 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/data_analysis_2020/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>notes</title>
+      <link>/data_analysis_2020/categories/notes/</link>
+      <pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/categories/notes/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>homework</title>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Intro to packages - Reproducible Data Analysis</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Intro to packages" />
+<meta property="og:description" content="Like all programming languages, R relies on a base language, which is extended by packages. When you installed R, you only installed the base language1. However, base R can only do so much.
+Most of R’s power lies is in its packages. Need to do timeseries forecasting? You’ll want the forecast package. Need to do multivariate statistics? vegan is world-leading. Currently there are more than 16,000 packages listed on CRAN for basically every task you can imagine." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/data_analysis_2020/notes/packages/" />
+<meta property="article:published_time" content="2020-09-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-09-08T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Intro to packages">
+<meta itemprop="description" content="Like all programming languages, R relies on a base language, which is extended by packages. When you installed R, you only installed the base language1. However, base R can only do so much.
+Most of R’s power lies is in its packages. Need to do timeseries forecasting? You’ll want the forecast package. Need to do multivariate statistics? vegan is world-leading. Currently there are more than 16,000 packages listed on CRAN for basically every task you can imagine.">
+<meta itemprop="datePublished" content="2020-09-08T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-09-08T00:00:00+00:00" />
+<meta itemprop="wordCount" content="676">
+
+
+
+<meta itemprop="keywords" content="basics," />
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Intro to packages"/>
+<meta name="twitter:description" content="Like all programming languages, R relies on a base language, which is extended by packages. When you installed R, you only installed the base language1. However, base R can only do so much.
+Most of R’s power lies is in its packages. Need to do timeseries forecasting? You’ll want the forecast package. Need to do multivariate statistics? vegan is world-leading. Currently there are more than 16,000 packages listed on CRAN for basically every task you can imagine."/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/data_analysis_2020/css/style.css">
+	<link rel="stylesheet" href="/data_analysis_2020/css/custom.css">
+
+	<link rel="shortcut icon" href="/data_analysis_2020/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/data_analysis_2020/" title="Reproducible Data Analysis" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/data_analysis_2020/img/svalbard_sky.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Reproducible Data Analysis</div>
+					<div class="logo__tagline">Public site for UT-Knoxville MICR 493/594; GEOL 490/590</div>
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Intro to packages</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Drew Steen</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-08T00:00:00Z">2020-09-08</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/data_analysis_2020/categories/notes/" rel="category">notes</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		
+	</div>
+</div>
+<div class="content post__content clearfix">
+			
+
+
+<p>Like all programming languages, R relies on a <em>base</em> language, which is extended by <em>packages</em>. When you installed R, you only installed the base language<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. However, base R can only do so much.</p>
+<p>Most of R’s power lies is in its packages. Need to do timeseries forecasting? You’ll want the <a href=""><strong>forecast</strong></a> package. Need to do multivariate statistics? <a href=""><strong>vegan</strong></a> is world-leading. Currently there are more than 16,000 packages listed on <a href="https://cran.r-project.org/web/packages/index.html">CRAN</a> for basically every task you can imagine.</p>
+<div id="using-pacakges" class="section level2">
+<h2>Using pacakges</h2>
+<p>An R package is really just a collection of R code plus some accessory files that help you and R to know how to use that code, organized in a specific way. Later in the course we will build our own packages.</p>
+<p>In order to use a package, you must:</p>
+<ol style="list-style-type: decimal">
+<li><em>Install</em> the package, which is to say, download it from the internet and save it in an appropriate place on your hard drive, and</li>
+<li><em>Load</em> the package into your computer’s memory.</li>
+</ol>
+</div>
+<div id="installing-packages" class="section level2">
+<h2>Installing packages</h2>
+<p>You only have to install a package once - until you upgrade R, at which point you should reinstall your packages. R makes it easy to install packages from CRAN using the <code>install.packages()</code> function. For instance, to install the <strong>vegan</strong> package, type the following at the console:</p>
+<pre class="r"><code>install.packages(&quot;vegan&quot;)</code></pre>
+<p>Note the quotation marks around <code>"vegan"</code>. Note also that it will never make sense to put this in a script, since you don’t want to install a package every time you run a script. (And it is rather rude to share a script with someone else that installs a package without asking.) You should only ever run <code>install.packages()</code> from the R console.</p>
+<p><code>install.packages()</code> will download a package directly to your <em>library</em>, which is the name of the directory or directories that store your R packages. You can determine your library using the <code>.libPaths()</code> function - my library is at <code>"/Library/Frameworks/R.framework/Versions/4.0/Resources/library"</code>. It is also possible to install packages from places like GitHub using procedures we’ll talk about later.</p>
+</div>
+<div id="loading-packages" class="section level2">
+<h2>Loading packages</h2>
+<p>Every time you open RStudio, or change projects, you need to load whatever packages you’re going to use. The function <code>library()</code> loads a package<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<p>You should load each package your script needs at the top of the script, so that readers will know what packages the script uses. For instance:</p>
+<pre class="r"><code>#############
+# We always start scripts with a header comment
+#############
+
+# Load all packages that this script uses
+library(tidyverse)
+library(vegan)</code></pre>
+<p>Note that <code>library()</code> takes the name of the function <strong>without quotation marks</strong>, e.g. <code>library(vegan)</code>, while <code>install.packages()</code> takes the name of the package inside quotation marks, e.g. <code>install.packages("vegan")</code>.</p>
+<div id="what-library-does" class="section level3">
+<h3>What <code>library()</code> does</h3>
+<p>Strictly speaking, <code>library()</code> <em>attaches</em> a package to the search path, rather than loading it into memory. The search path is the set of directories that R will look through when you tell it to access a function. We can see a summary of our search path with the <code>search()</code> function. We’ll discuss more about what the search path does, but for now, try the following: type <code>search()</code> in the console, then load a new package using <code>library()</code>, and type <code>search()</code> again.</p>
+</div>
+</div>
+<div id="the-tidyverse" class="section level1">
+<h1>The <strong>tidyverse</strong></h1>
+<p><strong>tidyverse</strong> is kind of a weird package because it is three things at once:</p>
+<ul>
+<li>An R package, which exists to load a couple of dozen other R packages</li>
+<li>A name for the set of R packages that <strong>tidyverse</strong> loads, and</li>
+<li>A philosophy about how best to do data analysis.</li>
+</ul>
+<p>We’ll talk more about the philosophy and specific packages in <strong>tidyverse</strong> later. The thing to know for now is that <strong>using R with the tidyverse is very different from using base R</strong>. Tidyverse demands a</p>
+<div id="installing-vs-loading-packages" class="section level3">
+<h3>Installing vs loading packages</h3>
+</div>
+<div id="getting-help-on-packages" class="section level3">
+<h3>Getting help on packages</h3>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Strictly speaking there are a couple of packages that come with base R, including <strong>stats</strong>, <strong>graphics</strong>, and <strong>utils</strong>. By default those are also loaded when you start R, unlike other packages, so for all intents and purposes those act like they’re part of base R<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>You’ll also see <code>require()</code> used to load packages. This is mostly equivalent to <code>library()</code> but there are a few techical reasons, described <a href="https://yihui.org/en/2014/07/library-vs-require/">here</a>, to prefer <code>library()</code><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/data_analysis_2020/tags/basics/" rel="tag">basics</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/data_analysis_2020/notes/intro-to-r-via-the-tidyverse/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Intro to R via the tidyverse</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Andrew D. Steen.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/data_analysis_2020/js/menu.js"></script>
+<script src="/data_analysis_2020/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>
