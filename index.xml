@@ -40,15 +40,6 @@ Most of R’s power lies is in its packages. Need to do timeseries forecasting? 
     </item>
     
     <item>
-      <title>test post</title>
-      <link>/data_analysis_2020/post/hw02/</link>
-      <pubDate>Sun, 06 Sep 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/data_analysis_2020/post/hw02/</guid>
-      <description>This is a test post</description>
-    </item>
-    
-    <item>
       <title>Intro to R via the tidyverse</title>
       <link>/data_analysis_2020/notes/intro-to-r-via-the-tidyverse/</link>
       <pubDate>Thu, 03 Sep 2020 00:00:00 +0000</pubDate>
