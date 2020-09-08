@@ -31,6 +31,17 @@ Most of R’s power lies is in its packages. Need to do timeseries forecasting? 
     </item>
     
     <item>
+      <title>Week 2 resources</title>
+      <link>/data_analysis_2020/resources/week-2-resources/</link>
+      <pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/resources/week-2-resources/</guid>
+      <description>to be updated
+ This week has a bunch of R basics. Chapters 1 and 4 of R for Data Science are a good place to start. However, I would like you all to practice your Git/Github skills by adding introductory references to this list.  To do that:
+ Go to https://github.com/adsteen/490_site_source, which contains the source code for this website Press the “Fork” link to make a copy of that Git “repo” (repository) On your version of this repository on the GitHub website (it’ll be labeled your-user-name/490_site_source, navigate to contents/resources/2020-09-08-Week_02-resources.</description>
+    </item>
+    
+    <item>
       <title>Homework 2</title>
       <link>/data_analysis_2020/homework/hw02/</link>
       <pubDate>Sun, 06 Sep 2020 00:00:00 +0000</pubDate>
