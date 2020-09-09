@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Homework 3 - Reproducible Data Analysis</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Homework 3" />
+<meta property="og:description" content="
+
+
+true
+
+
+library(tidyverse)
+## ── Attaching packages ───────────────────────────────────────────── tidyverse 1.3.0 ──
+## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
+## ✓ tibble  3.0.3     ✓ dplyr   1.0.0
+## ✓ tidyr   1.1.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.5.0
+## ── Conflicts ──────────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+d &lt;- read_csv(&quot;../../static/data/chris_names_wide.csv&quot;)
+## Parsed with column specification:
+## cols(
+##   year = col_double(),
+##   male = col_double(),
+##   female = col_double()
+## )
+d_l &lt;- d %&gt;%
+  pivot_longer(-year, names_to = &quot;sex&quot;)
+
+p1 &lt;- ggplot(d_l, aes(x=year, y=value, colour = sex)) &#43;
+  geom_line()
+print(p1)
+
+p2 &lt;- ggplot(d_l, aes(x=year, y=value, colour = sex)) &#43;
+  geom_point() &#43;
+  geom_smooth(method = &quot;loess&quot;)
+print(p2)
+## `geom_smooth()` using formula &#39;y ~ x&#39;
+
+p3 &lt;- ggplot(d_l, aes(x=sex, y=value)) &#43;
+  geom_boxplot()
+print(p3)
+
+#ggsave(&quot;../../static/plots/chris_line.png&quot;, p1, height = 3, width = 4, units = &quot;in&quot;, dpi = 300)
+#ggsave(&quot;../../static/plots/chris_smooth.png&quot;, p2, height = 3, width = 4, units = &quot;in&quot;, dpi = 3)
+#ggsave(&quot;../../static/plots/chris_box.png&quot;, p3, height = 3, width = 4, units = &quot;in&quot;, dpi = 300)
+This homework, as well as homework 2, is due Wednesday Sept 16. Lecture notes coming ASAP.
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/data_analysis_2020/homework/hw03/" />
+<meta property="article:published_time" content="2020-09-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-09-09T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Homework 3">
+<meta itemprop="description" content="
+
+
+true
+
+
+library(tidyverse)
+## ── Attaching packages ───────────────────────────────────────────── tidyverse 1.3.0 ──
+## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
+## ✓ tibble  3.0.3     ✓ dplyr   1.0.0
+## ✓ tidyr   1.1.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.5.0
+## ── Conflicts ──────────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+d &lt;- read_csv(&quot;../../static/data/chris_names_wide.csv&quot;)
+## Parsed with column specification:
+## cols(
+##   year = col_double(),
+##   male = col_double(),
+##   female = col_double()
+## )
+d_l &lt;- d %&gt;%
+  pivot_longer(-year, names_to = &quot;sex&quot;)
+
+p1 &lt;- ggplot(d_l, aes(x=year, y=value, colour = sex)) &#43;
+  geom_line()
+print(p1)
+
+p2 &lt;- ggplot(d_l, aes(x=year, y=value, colour = sex)) &#43;
+  geom_point() &#43;
+  geom_smooth(method = &quot;loess&quot;)
+print(p2)
+## `geom_smooth()` using formula &#39;y ~ x&#39;
+
+p3 &lt;- ggplot(d_l, aes(x=sex, y=value)) &#43;
+  geom_boxplot()
+print(p3)
+
+#ggsave(&quot;../../static/plots/chris_line.png&quot;, p1, height = 3, width = 4, units = &quot;in&quot;, dpi = 300)
+#ggsave(&quot;../../static/plots/chris_smooth.png&quot;, p2, height = 3, width = 4, units = &quot;in&quot;, dpi = 3)
+#ggsave(&quot;../../static/plots/chris_box.png&quot;, p3, height = 3, width = 4, units = &quot;in&quot;, dpi = 300)
+This homework, as well as homework 2, is due Wednesday Sept 16. Lecture notes coming ASAP.
+">
+<meta itemprop="datePublished" content="2020-09-09T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-09-09T00:00:00+00:00" />
+<meta itemprop="wordCount" content="260">
+
+
+
+<meta itemprop="keywords" content="week03," />
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Homework 3"/>
+<meta name="twitter:description" content="
+
+
+true
+
+
+library(tidyverse)
+## ── Attaching packages ───────────────────────────────────────────── tidyverse 1.3.0 ──
+## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
+## ✓ tibble  3.0.3     ✓ dplyr   1.0.0
+## ✓ tidyr   1.1.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.5.0
+## ── Conflicts ──────────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+d &lt;- read_csv(&quot;../../static/data/chris_names_wide.csv&quot;)
+## Parsed with column specification:
+## cols(
+##   year = col_double(),
+##   male = col_double(),
+##   female = col_double()
+## )
+d_l &lt;- d %&gt;%
+  pivot_longer(-year, names_to = &quot;sex&quot;)
+
+p1 &lt;- ggplot(d_l, aes(x=year, y=value, colour = sex)) &#43;
+  geom_line()
+print(p1)
+
+p2 &lt;- ggplot(d_l, aes(x=year, y=value, colour = sex)) &#43;
+  geom_point() &#43;
+  geom_smooth(method = &quot;loess&quot;)
+print(p2)
+## `geom_smooth()` using formula &#39;y ~ x&#39;
+
+p3 &lt;- ggplot(d_l, aes(x=sex, y=value)) &#43;
+  geom_boxplot()
+print(p3)
+
+#ggsave(&quot;../../static/plots/chris_line.png&quot;, p1, height = 3, width = 4, units = &quot;in&quot;, dpi = 300)
+#ggsave(&quot;../../static/plots/chris_smooth.png&quot;, p2, height = 3, width = 4, units = &quot;in&quot;, dpi = 3)
+#ggsave(&quot;../../static/plots/chris_box.png&quot;, p3, height = 3, width = 4, units = &quot;in&quot;, dpi = 300)
+This homework, as well as homework 2, is due Wednesday Sept 16. Lecture notes coming ASAP.
+"/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/data_analysis_2020/css/style.css">
+	<link rel="stylesheet" href="/data_analysis_2020/css/custom.css">
+
+	<link rel="shortcut icon" href="/data_analysis_2020/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/data_analysis_2020/" title="Reproducible Data Analysis" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/data_analysis_2020/img/svalbard_sky.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Reproducible Data Analysis</div>
+					<div class="logo__tagline">Public site for UT-Knoxville MICR 493/594; GEOL 490/590</div>
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Homework 3</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-09T00:00:00Z">2020-09-09</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/data_analysis_2020/categories/homework/" rel="category">homework</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<div id="input-output" class="section level1">
+<h1>Input / Output</h1>
+<p>Use one of the <a href="https://readr.tidyverse.org/"><strong>readr</strong></a> functions (<code>read_csv()</code>, <code>read_delim()</code>, etc), read in either:</p>
+<ul>
+<li>Some of your own data, or</li>
+<li>The .csv file <a href="data/chris_data_wide.csv">here</a>. This is a subset of the <em>babynames</em> dataset, which lists the number of babies registered with the US Social Security Administration by year, sex, and name. I have filtered it to only include babies named “Chris” and reformatted it. The <code>male</code> and <code>female</code> columns indicate numbers of male and female children, respectively.</li>
+</ul>
+<p>Be sure to check the check the Data Import Cheat Sheet <a href="https://rstudio.com/resources/cheatsheets/">here</a>.</p>
+<p>Save the data file with a logical file name to a new directory, <code>reproducible_data_analysis/data</code>.</p>
+</div>
+<div id="wide-vs-long-tidy-data" class="section level1">
+<h1>Wide vs long (tidy) data</h1>
+<p>Convert your data to long (tidy) format. For the <code>chris_data_wide</code> dataset, that means you should have a column for the year, a column for the number of babies, and a column for the sex of the baby (male vs female).</p>
+<p>You will want to use the <code>pivot_wider()</code> function. Check the <em>Reshape Data</em> section of the <a href="https://rstudio.com/resources/cheatsheets/">Data Import Cheat Sheet</a> for tips.</p>
+</div>
+<div id="plotting-with-ggplot2" class="section level1">
+<h1>Plotting with ggplot2</h1>
+<p>If you used the <code>chris_data_wide</code> dataset, create the following plots using <strong>ggplot2</strong>:</p>
+<ul>
+<li>A line plot with year on the x axis, the number of babies on the y axis, and a different color for each sex</li>
+<li>A plot with the same axes, but with a “loess”-smoothed line representing the data</li>
+<li>A boxplot with sex on the x axis and the number of people with that name on the y-axis.</li>
+</ul>
+<p>If you used your own data, use <strong>ggplot2</strong> to make 3 plots that show the data in different ways.</p>
+</div>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/data_analysis_2020/tags/week03/" rel="tag">week03</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/data_analysis_2020/homework/hw02/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Homework 2</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Andrew D. Steen.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/data_analysis_2020/js/menu.js"></script>
+<script src="/data_analysis_2020/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>
