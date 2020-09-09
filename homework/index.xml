@@ -19,33 +19,7 @@
       <guid>/data_analysis_2020/homework/hw03/</guid>
       <description>
 
-&lt;div id=&#34;TOC&#34;&gt;
-true
-&lt;/div&gt;
 
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# library(tidyverse)
-# 
-# d &amp;lt;- read_csv(&amp;quot;../../static/data/chris_names_wide.csv&amp;quot;)
-# 
-# d_l &amp;lt;- d %&amp;gt;%
-#   pivot_longer(-year, names_to = &amp;quot;sex&amp;quot;)
-# 
-# p1 &amp;lt;- ggplot(d_l, aes(x=year, y=value, colour = sex)) +
-#   geom_line()
-# print(p1)
-# 
-# p2 &amp;lt;- ggplot(d_l, aes(x=year, y=value, colour = sex)) +
-#   geom_point() +
-#   geom_smooth(method = &amp;quot;loess&amp;quot;)
-# print(p2)
-# 
-# p3 &amp;lt;- ggplot(d_l, aes(x=sex, y=value)) +
-#   geom_boxplot()
-# print(p3)
-
-#ggsave(&amp;quot;../../static/plots/chris_line.png&amp;quot;, p1, height = 3, width = 4, units = &amp;quot;in&amp;quot;, dpi = 300)
-#ggsave(&amp;quot;../../static/plots/chris_smooth.png&amp;quot;, p2, height = 3, width = 4, units = &amp;quot;in&amp;quot;, dpi = 3)
-#ggsave(&amp;quot;../../static/plots/chris_box.png&amp;quot;, p3, height = 3, width = 4, units = &amp;quot;in&amp;quot;, dpi = 300)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This homework, as well as homework 2, is due Wednesday Sept 16. Lecture notes coming ASAP.&lt;/p&gt;
 </description>
     </item>

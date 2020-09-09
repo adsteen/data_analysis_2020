@@ -6,10 +6,9 @@ slug: "hw03"
 categories: [homework]
 tags: [week03]
 draft: false
-toc: true
 ---
 
-```{r, setup, echo=TRUE}
+```{r, setup, echo=FALSE}
 # library(tidyverse)
 # 
 # d <- read_csv("../../static/data/chris_names_wide.csv")
