@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>GEOL 490/590 style guide - Reproducible Data Analysis</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="GEOL 490/590 style guide" />
+<meta property="og:description" content="Style is substance Donald Knuth famously wrote &ldquo;Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.&rdquo; (Knuth, 1983, Literate Programming).
+Accordingly, it is important to write our code so that it is easily readable by humans. What defines easily readable? Well, it helps for the whole community of readers to be working from a common set of rules." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/data_analysis_2020/resources/geol-490-590-style-guide/" />
+<meta property="article:published_time" content="2019-09-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-09-03T00:00:00+00:00" />
+
+		<meta itemprop="name" content="GEOL 490/590 style guide">
+<meta itemprop="description" content="Style is substance Donald Knuth famously wrote &ldquo;Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.&rdquo; (Knuth, 1983, Literate Programming).
+Accordingly, it is important to write our code so that it is easily readable by humans. What defines easily readable? Well, it helps for the whole community of readers to be working from a common set of rules.">
+<meta itemprop="datePublished" content="2019-09-03T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2019-09-03T00:00:00+00:00" />
+<meta itemprop="wordCount" content="402">
+
+
+
+<meta itemprop="keywords" content="" />
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="GEOL 490/590 style guide"/>
+<meta name="twitter:description" content="Style is substance Donald Knuth famously wrote &ldquo;Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.&rdquo; (Knuth, 1983, Literate Programming).
+Accordingly, it is important to write our code so that it is easily readable by humans. What defines easily readable? Well, it helps for the whole community of readers to be working from a common set of rules."/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/data_analysis_2020/css/style.css">
+	<link rel="stylesheet" href="/data_analysis_2020/css/custom.css">
+
+	<link rel="shortcut icon" href="/data_analysis_2020/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/data_analysis_2020/" title="Reproducible Data Analysis" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/data_analysis_2020/img/svalbard_sky.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Reproducible Data Analysis</div>
+					<div class="logo__tagline">Public site for UT-Knoxville MICR 493/594; GEOL 490/590</div>
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">GEOL 490/590 style guide</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Drew Steen</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2019-09-03T00:00:00Z">2019-09-03</time></div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#commenting">Commenting</a></li>
+    <li><a href="#script-organization">Script organization</a></li>
+    <li><a href="#object-names">Object names</a></li>
+    <li><a href="#modifications">Modifications</a></li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<h1 id="style-is-substance">Style <em>is</em> substance</h1>
+<p>Donald Knuth famously wrote &ldquo;Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.&rdquo; (<a href="http://www.literateprogramming.com/knuthweb.pdf">Knuth, 1983, Literate Programming</a>).</p>
+<p>Accordingly, it is important to write our code so that it is easily readable by humans. What defines easily readable? Well, it helps for the whole community of readers to be working from a common set of rules. We&rsquo;ll adopt Hadley Wickham&rsquo;s <a href="https://style.tidyverse.org/">tidyverse style guide</a> for our class, with a few modifications listed below.</p>
+<h1 id="modifications-for-geol-490590">Modifications for GEOL 490/590</h1>
+<p>Much of the tidyverse style guide is focused on writing packages for use by other R users. At first, we will mainly need to pay attention to what is in sections <a href="https://style.tidyverse.org/files.html">1</a> and <a href="https://style.tidyverse.org/syntax.html">2</a>, which deal with naming files and syntax. I&rsquo;m going to add a few other rules that will be particularly useful for us.</p>
+<h2 id="commenting">Commenting</h2>
+<ul>
+<li>All scripts should begin with lines of comments that
+<ul>
+<li>Explain the general purpose of the script</li>
+<li>Reference the script to an assignment, if necessary (e.g., <code>For Homework 4</code>)</li>
+<li>Include the name of the author: not strictly necessary, but sometimes useful when we&rsquo;re passing around scripts.</li>
+</ul>
+</li>
+<li>The scope of the comment should be reflected by its position and the number of lines it occupies.
+<ul>
+<li>Script header comments are at least 3 lines:</li>
+</ul>
+<pre><code>#########
+# Script for Homework 4, badplot assignment
+#########
+</code></pre><ul>
+<li>Comments that refer to a few lines of code will typically occupy a single line</li>
+<li>Comments on a single part of a piped expression or plot should follow the relevant line. For instance:</li>
+</ul>
+<pre><code>p &lt;- ggplot(mtcars, aes(x = mpg, y = qsec)) + 
+    geom_point() + 
+    geom_smooth(method = &quot;lm&quot;) + # Point of analysis is to estimate a relationship between efficiency and speed
+    theme_minimal()
+</code></pre></li>
+<li>Remember that comments should explain <strong>why</strong> the code was written, not <strong>how</strong> the code works</li>
+</ul>
+<h2 id="script-organization">Script organization</h2>
+<ol>
+<li>Start with header comment</li>
+<li>Load all libraries next</li>
+<li>Define any variables that are used throughout the script (e.g., <code>fig.width = 7.5</code>) and graphical theme (<code>theme_set(theme_classic())</code>)</li>
+<li>Organize the script in hierarchical sections, defined by comments</li>
+</ol>
+<h2 id="object-names">Object names</h2>
+<ul>
+<li>Name lists, data frames, and function in <code>snake_case</code> using a <code>_</code> separator:
+<code>med_enzymes</code></li>
+<li>Name vectors in <code>snake.case</code> using a <code>.</code> separator: <code>site.temperatures</code></li>
+</ul>
+<h2 id="modifications">Modifications</h2>
+<ul>
+<li>We should modify this guide as we progress through the class! This will be a good way to practice forking and making pull requests in git.</li>
+</ul>
+
+		</div>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/data_analysis_2020/resources/week-2-resources/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">Week 2 resources</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Andrew D. Steen.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/data_analysis_2020/js/menu.js"></script>
+<script src="/data_analysis_2020/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

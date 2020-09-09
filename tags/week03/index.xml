@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>week03 on Reproducible Data Analysis</title>
+    <link>/data_analysis_2020/tags/week03/</link>
+    <description>Recent content in week03 on Reproducible Data Analysis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 08 Sep 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/data_analysis_2020/tags/week03/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Class Style Guide</title>
+      <link>/data_analysis_2020/resources/style-guide/</link>
+      <pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/resources/style-guide/</guid>
+      <description>Style is substance Donald Knuth famously wrote “Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.” (Knuth, 1983, Literate Programming).
+Accordingly, it is important to write our code so that it is easily readable by humans. What defines easily readable? Well, it helps for the whole community of readers to be working from a common set of rules.</description>
+    </item>
+    
+  </channel>
+</rss>
