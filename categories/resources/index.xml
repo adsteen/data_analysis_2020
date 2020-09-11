@@ -6,10 +6,19 @@
     <description>Recent content in resources on Reproducible Data Analysis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 08 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/data_analysis_2020/categories/resources/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Week 3 Resources</title>
+      <link>/data_analysis_2020/resources/week03-resources/</link>
+      <pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/resources/week03-resources/</guid>
+      <description>  The RStudio list of cheat sheets. The Data Import, Data Transformation, Data Visualization, and RStudio IDE cheat sheets will be particularly valuable to you. R for Data Science Chapter 3 Hadley Wickham on Tidy data. Note that this old-ish paper uses the syntax of a package called plyr, which is a bit different from the tidyverse counterpart called dplyr.  </description>
+    </item>
     
     <item>
       <title>Class Style Guide</title>
@@ -27,8 +36,7 @@ Accordingly, it is important to write our code so that it is easily readable by 
       <pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>/data_analysis_2020/resources/week-2-resources/</guid>
-      <description>to be updated
- This week has a bunch of R basics. Chapters 1 and 4 of R for Data Science are a good place to start. However, I would like you all to practice your Git/Github skills by adding introductory references to this list.  To do that:
+      <description>This week has a bunch of R basics. Chapters 1 and 4 of R for Data Science are a good place to start. However, I would like you all to practice your Git/Github skills by adding introductory references to this list.  To do that:
  Go to https://github.com/adsteen/490_site_source, which contains the source code for this website Press the “Fork” link to make a copy of that Git “repo” (repository) On your version of this repository on the GitHub website (it’ll be labeled your-user-name/490_site_source, navigate to contents/resources/2020-09-08-Week_02-resources.</description>
     </item>
     

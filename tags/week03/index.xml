@@ -6,10 +6,32 @@
     <description>Recent content in week03 on Reproducible Data Analysis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 09 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/data_analysis_2020/tags/week03/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Data frames: Your new favorite data structure</title>
+      <link>/data_analysis_2020/notes/data-frames/</link>
+      <pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/notes/data-frames/</guid>
+      <description>
+
+
+&lt;p&gt;Discusses the data structure called data frames: what they are and why they are so important.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Week 3 Resources</title>
+      <link>/data_analysis_2020/resources/week03-resources/</link>
+      <pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/resources/week03-resources/</guid>
+      <description>  The RStudio list of cheat sheets. The Data Import, Data Transformation, Data Visualization, and RStudio IDE cheat sheets will be particularly valuable to you. R for Data Science Chapter 3 Hadley Wickham on Tidy data. Note that this old-ish paper uses the syntax of a package called plyr, which is a bit different from the tidyverse counterpart called dplyr.  </description>
+    </item>
     
     <item>
       <title>Homework 3</title>

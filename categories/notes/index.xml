@@ -6,10 +6,23 @@
     <description>Recent content in notes on Reproducible Data Analysis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 08 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/data_analysis_2020/categories/notes/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Data frames: Your new favorite data structure</title>
+      <link>/data_analysis_2020/notes/data-frames/</link>
+      <pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/notes/data-frames/</guid>
+      <description>
+
+
+&lt;p&gt;Discusses the data structure called data frames: what they are and why they are so important.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Getting help in R</title>

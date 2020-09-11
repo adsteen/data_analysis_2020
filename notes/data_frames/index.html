@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Data_frames - Reproducible Data Analysis</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Data_frames" />
+<meta property="og:description" content="
+
+
+
+This is my new test page
+Discusses the data structure called data frames: what they are and why they are so important.
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/data_analysis_2020/notes/data_frames/" />
+<meta property="article:published_time" content="2020-09-10T16:45:24-04:00" />
+<meta property="article:modified_time" content="2020-09-10T16:45:24-04:00" />
+
+		<meta itemprop="name" content="Data_frames">
+<meta itemprop="description" content="
+
+
+
+This is my new test page
+Discusses the data structure called data frames: what they are and why they are so important.
+">
+<meta itemprop="datePublished" content="2020-09-10T16:45:24-04:00" />
+<meta itemprop="dateModified" content="2020-09-10T16:45:24-04:00" />
+<meta itemprop="wordCount" content="429">
+
+
+
+<meta itemprop="keywords" content="" />
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Data_frames"/>
+<meta name="twitter:description" content="
+
+
+
+This is my new test page
+Discusses the data structure called data frames: what they are and why they are so important.
+"/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/data_analysis_2020/css/style.css">
+	<link rel="stylesheet" href="/data_analysis_2020/css/custom.css">
+
+	<link rel="shortcut icon" href="/data_analysis_2020/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/data_analysis_2020/" title="Reproducible Data Analysis" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/data_analysis_2020/img/svalbard_sky.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Reproducible Data Analysis</div>
+					<div class="logo__tagline">Public site for UT-Knoxville MICR 493/593; GEOL 490/590</div>
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Data_frames</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-10T16:45:24-04:00">2020-09-10</time></div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		
+	</div>
+</div>
+<div class="content post__content clearfix">
+			</div>
+<div id="this-is-my-new-test-page-1" class="section level1">
+<h1>This is my new test page</h1>
+<pre class="r"><code>library(tidyverse)
+knitr::opts_chunk$set(eval=FALSE)</code></pre>
+</div>
+<div id="review-of-data-structures" class="section level1">
+<h1>Review of data structures</h1>
+<p>In lecture on Wednesday, Sept 9, we discussed a key data structure in R: <strong>vectors</strong><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. There are three important rules for vectors:</p>
+<ul>
+<li>They are <strong>1-dimensional</strong>: think of them like a column of values.</li>
+<li>They are <strong>ordered</strong>: there is a first element, a second element, etc.</li>
+<li>They contain <strong>a single data type</strong>: a vector can be integer, double, logical, or character, but they can’t be a mix of those. If a vector looks like it has a mix of data types, that’s because it has been <em>coerced</em> to a more general type. For instance, <code>c(7, "aardvark")</code> will be coerced to a character vector: the number <code>7</code> will be converted to the character <code>"7"</code>.</li>
+</ul>
+<p>There are a two other data structures which are frequently used in base R, but not in the tidyverse:</p>
+<ul>
+<li><strong>Matrix</strong>: a 2-dimensional vector. This follows the same rules as vectors, but it has rows and columns.</li>
+<li><strong>List</strong>: I think of this like a bag, into which you can throw any data structure you want. (Lists are ordered, like vectors, so maybe it is an unusually well-ordered bag?) The first element of a list might be a character vector, the second might be a integer matrix, and the third might be another list (which might, in turn, contain more lists)! These are great when you have to keep track of non-parallel information about something. For instance, a linear model object contains the coefficients of the linear model, the residuals, and all sorts of other information that comes in different data types and different lengths. The <code>lm()</code> function therefore returns a special kind of list to store all that information.</li>
+</ul>
+</div>
+<div id="data-frames-and-tibbles" class="section level1">
+<h1>Data frames and tibbles</h1>
+<p>A data frame is a special kind of list. Data frames must obey two rules:</p>
+<ul>
+<li>The list can only contain <strong>vectors</strong></li>
+<li>Each vector must be the same <strong>length</strong></li>
+</ul>
+<p>Therefore, data frames act like a rectangular table. For instance, here are the first six rows of the data frame <code>mtcars</code>, a table that is built into R’s <strong>datasets</strong> package, which is autoloaded when you start R:</p>
+<pre class="r"><code>print(mtcars) # print the first 6 rows</code></pre>
+<pre class="r"><code>Sys.sleep(60)</code></pre>
+<p>For instance, say we were foresters, taking data about trees. Perhaps we would record the species of the tree, its height, whether it hosts parasites, and what we think its name would be if it were an <a href="https://en.wikipedia.org/wiki/Ent">Ent</a>.</p>
+<p>Each quantity we measure would be recorded in a separate column of the data frame, and each</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Properly speaking, these are called atomic vectors. However, colloquially we refer to these as vectors.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+		</div>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/data_analysis_2020/notes/data-frames/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Data frames: Your new favorite data structure</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Andrew D. Steen.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/data_analysis_2020/js/menu.js"></script>
+<script src="/data_analysis_2020/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>
