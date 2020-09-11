@@ -6,10 +6,23 @@
     <description>Recent content in notes on Reproducible Data Analysis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 10 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 11 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/data_analysis_2020/categories/notes/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>The importance of tidy data</title>
+      <link>/data_analysis_2020/notes/tidy-data/</link>
+      <pubDate>Fri, 11 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/notes/tidy-data/</guid>
+      <description>
+
+
+&lt;p&gt;Introduces the idea of &lt;strong&gt;tidy data&lt;/strong&gt;.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Data frames: Your new favorite data structure</title>
@@ -30,7 +43,11 @@
       <pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>/data_analysis_2020/notes/help/</guid>
-      <description>Help on specific functions Every function in R has a an associated documentaion file. In RStudio, typing the name of the function, prefaced by ?, will pull up the documentation for that function. For instance, try ?sum[On my machine, RStudio sometimes gets over-excited about auto-completing and tries to fill in the name of a longer function. Just type backspace when that happens.] (you don’t need the ()): in the lower-right-hand panel of RStudio you’ll see a documentation displayed.</description>
+      <description>
+
+
+&lt;p&gt;Introduces how to read documentation for R functions and packages, and how to get help from the internet.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -39,8 +56,11 @@
       <pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>/data_analysis_2020/notes/packages/</guid>
-      <description>Like all programming languages, R relies on a base language, which is extended by packages. When you installed R, you only installed the base language1. However, base R can only do so much.
-Most of R’s power lies is in its packages. Need to do timeseries forecasting? You’ll want the forecast package. Need to do multivariate statistics? vegan is world-leading. Currently there are more than 16,000 packages listed on CRAN for basically every task you can imagine.</description>
+      <description>
+
+
+&lt;p&gt;Explains what an R package is, how to install and load them, and discusses a particularly important set of packages called the tidyverse.&lt;/p&gt;
+</description>
     </item>
     
   </channel>

@@ -26,8 +26,11 @@
       <pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>/data_analysis_2020/resources/style-guide/</guid>
-      <description>Style is substance Donald Knuth famously wrote “Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.” (Knuth, 1983, Literate Programming).
-Accordingly, it is important to write our code so that it is easily readable by humans. What defines easily readable? Well, it helps for the whole community of readers to be working from a common set of rules.</description>
+      <description>
+
+
+&lt;p&gt;Explains why it is so important to format your code well, and how you are expected to format your code for this class.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -36,8 +39,11 @@ Accordingly, it is important to write our code so that it is easily readable by 
       <pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>/data_analysis_2020/resources/week-2-resources/</guid>
-      <description>This week has a bunch of R basics. Chapters 1 and 4 of R for Data Science are a good place to start. However, I would like you all to practice your Git/Github skills by adding introductory references to this list.  To do that:
- Go to https://github.com/adsteen/490_site_source, which contains the source code for this website Press the “Fork” link to make a copy of that Git “repo” (repository) On your version of this repository on the GitHub website (it’ll be labeled your-user-name/490_site_source, navigate to contents/resources/2020-09-08-Week_02-resources.</description>
+      <description>
+
+
+&lt;p&gt;Resources for week 2.
+</description>
     </item>
     
   </channel>
