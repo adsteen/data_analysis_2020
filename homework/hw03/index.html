@@ -11,7 +11,7 @@
 <meta property="og:description" content="
 
 
-This homework, as well as homework 2, is due Wednesday Sept 16. Lecture notes coming ASAP.
+This homework, as well as homework 2, is due Wednesday Sept 16.
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/data_analysis_2020/homework/hw03/" />
@@ -22,11 +22,11 @@ This homework, as well as homework 2, is due Wednesday Sept 16. Lecture notes co
 <meta itemprop="description" content="
 
 
-This homework, as well as homework 2, is due Wednesday Sept 16. Lecture notes coming ASAP.
+This homework, as well as homework 2, is due Wednesday Sept 16.
 ">
 <meta itemprop="datePublished" content="2020-09-09T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2020-09-09T00:00:00+00:00" />
-<meta itemprop="wordCount" content="331">
+<meta itemprop="wordCount" content="410">
 
 
 
@@ -37,7 +37,7 @@ This homework, as well as homework 2, is due Wednesday Sept 16. Lecture notes co
 <meta name="twitter:description" content="
 
 
-This homework, as well as homework 2, is due Wednesday Sept 16. Lecture notes coming ASAP.
+This homework, as well as homework 2, is due Wednesday Sept 16.
 "/>
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -89,7 +89,8 @@ This homework, as well as homework 2, is due Wednesday Sept 16. Lecture notes co
 	</div>
 </div>
 <div class="content post__content clearfix">
-			<div id="input-output" class="section level1">
+			</p>
+<div id="input-output" class="section level1">
 <h1>Input / Output</h1>
 <p>Use one of the <a href="https://readr.tidyverse.org/"><strong>readr</strong></a> functions (<code>read_csv()</code>, <code>read_delim()</code>, etc), read in either:</p>
 <ul>
@@ -103,6 +104,15 @@ This homework, as well as homework 2, is due Wednesday Sept 16. Lecture notes co
 <h1>Wide vs long (tidy) data</h1>
 <p>Convert your data to long (tidy) format. For the <code>chris_data_wide</code> dataset, that means you should have a column for the year, a column for the number of babies, and a column for the sex of the baby (male vs female).</p>
 <p>You will want to use the <code>pivot_wider()</code> function. Check the <em>Reshape Data</em> section of the <a href="https://rstudio.com/resources/cheatsheets/">Data Import Cheat Sheet</a> for tips.</p>
+<p><strong>UPDATE</strong></p>
+<p>I did y’all a dirty here. I didn’t give you the full syntax for <code>pivot_wider()</code> because I wanted you to work on it a bit on your own. However, I meant to pivot you to <code>pivot_longer()</code>: after all, we want to turn <code>chris_data_wide</code> from wide-format to long format, so <code>pivot_longer()</code> is the function we want.</p>
+<p>The syntax for this would be:</p>
+<pre class="r"><code>d &lt;- read_csv(&quot;data/chris_data_wide.csv&quot;)
+d_long &lt;- pivot_longer(d, 
+                       cols = -year, 
+                       names_to = &quot;sex&quot;, 
+                       values_to = &quot;n&quot;)</code></pre>
+<p><strong>end update</strong></p>
 </div>
 <div id="plotting-with-ggplot2" class="section level1">
 <h1>Plotting with ggplot2</h1>
