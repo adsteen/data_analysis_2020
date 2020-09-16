@@ -12,32 +12,6 @@
     
     
     <item>
-      <title>Getting help in R</title>
-      <link>/data_analysis_2020/notes/help/</link>
-      <pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/data_analysis_2020/notes/help/</guid>
-      <description>
-
-
-&lt;p&gt;Introduces how to read documentation for R functions and packages, and how to get help from the internet.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Intro to packages</title>
-      <link>/data_analysis_2020/notes/packages/</link>
-      <pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/data_analysis_2020/notes/packages/</guid>
-      <description>
-
-
-&lt;p&gt;Explains what an R package is, how to install and load them, and discusses a particularly important set of packages called the tidyverse.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Week 2 resources</title>
       <link>/data_analysis_2020/resources/week-2-resources/</link>
       <pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate>
@@ -48,15 +22,6 @@
 
 &lt;p&gt;Resources for week 2.
 </description>
-    </item>
-    
-    <item>
-      <title>Homework 2</title>
-      <link>/data_analysis_2020/homework/hw02/</link>
-      <pubDate>Sun, 06 Sep 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/data_analysis_2020/homework/hw02/</guid>
-      <description>&lt;p&gt;This homework, as well as homework 3, is due Wednesday Sept 16. Lecture notes coming ASAP.&lt;/p&gt;</description>
     </item>
     
     <item>

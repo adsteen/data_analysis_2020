@@ -1,0 +1,26 @@
+---
+title: 'dplyr: Getting Started with Data Wrangling'
+author: ~
+date: '2020-09-16'
+slug: dplyr-getting-started-with-data-wrangling
+categories: [tidyverse]
+tags: [week05]
+draft: yes
+---
+
+Expands on the idea of [split-apply-combine](https://www.jstatsoft.org/article/view/v040i01) and how to use the **dplyr** package.
+
+<!--more-->
+
+We've discussed how to do some basics in R: create scripts, add numbers, make simple plots. In this lesson, we begin working with **dplyr**, the package for performing split-apply-combine operations on data frames which is at heart of the tidyverse.
+
+For this lesson, we'll use the `flights` data set in the **nycflights13** package. As usual, we'll install it (once) with `install.packages("nycflights13")` and load it (each time we open RStudio) using `library(nycflights13)`. 
+
+First let's get a sense of the structure of `flights`:
+
+```{r intro}
+asdf
+```
+
+
+asdf

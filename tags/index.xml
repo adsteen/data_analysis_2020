@@ -6,26 +6,53 @@
     <description>Recent content in Tags on Reproducible Data Analysis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 15 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/data_analysis_2020/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>basics</title>
-      <link>/data_analysis_2020/tags/basics/</link>
+      <title>week05</title>
+      <link>/data_analysis_2020/tags/week05/</link>
+      <pubDate>Tue, 15 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/tags/week05/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>data wrangling</title>
+      <link>/data_analysis_2020/tags/data-wrangling/</link>
       <pubDate>Fri, 11 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>/data_analysis_2020/tags/basics/</guid>
+      <guid>/data_analysis_2020/tags/data-wrangling/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>week04</title>
+      <link>/data_analysis_2020/tags/week04/</link>
+      <pubDate>Fri, 11 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/tags/week04/</guid>
       <description></description>
     </item>
     
     <item>
       <title>week03</title>
       <link>/data_analysis_2020/tags/week03/</link>
-      <pubDate>Fri, 11 Sep 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>/data_analysis_2020/tags/week03/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>basics</title>
+      <link>/data_analysis_2020/tags/basics/</link>
+      <pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/tags/basics/</guid>
       <description></description>
     </item>
     

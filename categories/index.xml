@@ -6,10 +6,28 @@
     <description>Recent content in Categories on Reproducible Data Analysis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 15 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/data_analysis_2020/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>homework</title>
+      <link>/data_analysis_2020/categories/homework/</link>
+      <pubDate>Tue, 15 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/categories/homework/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rmarkdown</title>
+      <link>/data_analysis_2020/categories/rmarkdown/</link>
+      <pubDate>Tue, 15 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/categories/rmarkdown/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>notes</title>
@@ -26,15 +44,6 @@
       <pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>/data_analysis_2020/categories/resources/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>homework</title>
-      <link>/data_analysis_2020/categories/homework/</link>
-      <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/data_analysis_2020/categories/homework/</guid>
       <description></description>
     </item>
     

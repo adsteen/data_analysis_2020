@@ -6,10 +6,19 @@
     <description>Recent content in Notes on Reproducible Data Analysis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 15 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/data_analysis_2020/notes/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Intro to RMarkdown</title>
+      <link>/data_analysis_2020/notes/intro-to-rmarkdown/</link>
+      <pubDate>Tue, 15 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/notes/intro-to-rmarkdown/</guid>
+      <description>&lt;p&gt;Intro to the RMarkdown + knitr system for creating reproducible documents.ß&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>The importance of tidy data</title>

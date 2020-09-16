@@ -1,0 +1,55 @@
+---
+title: "HW 5 solutions"
+author: "Drew Steen"
+date: "9/15/2020"
+output: md_document
+---
+
+# Setup
+```{r}
+library(tidyverse)
+library(nycflights13)
+```
+
+
+# Split-apply-combine
+
+1. Use `?nycflights13::flights` to see the documentation of flights. (You can't really show this in an RMarkdown document, but please do it.)
+
+2. Use the `glimpse()` function to get a general sense of the `flights` data frame. How many rows and columns does `flights` have? 
+
+```{r}
+glimpse(flights)
+```
+
+We can see from `glimpse()` that `flights` has `r nrow(flights)` rows (observations). 
+
+3. Use `filter()` to create a data frame of just the flights that departed 2 hours late or more. What fraction of flights departed at least 2 hours late?
+```{r}
+delays <- flights %>%
+  filter(dep_delay > 120)
+frac.late <- nrow(delays) / nrow(flights)
+frac.late
+```
+
+We can see that `r formatC(frac.late * 100, type = "f", digits = 0)`% of flights were late.
+
+4. Use `mutate()` and `paste0()` to create a column named `flight.code` that contains the combined airline and flight number (e.g., "UA5041").
+
+```{r}
+flights %>%
+  mutate(flight.code = paste0(carrier, flight))
+```
+
+5. Use `group_by()`, `summarise()`, and `n()` to make a data frame showing how many flights each aircraft (`tail_num()`) flew for each carrier throughout the whole data set.
+
+```{r}
+frequent_fliers <- flights %>%
+  group_by(carrier, tailnum) %>%
+  summarise(n.flights = n())
+  
+```
+
+
+
+

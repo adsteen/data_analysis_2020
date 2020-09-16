@@ -6,36 +6,10 @@
     <description>Recent content in week03 on Reproducible Data Analysis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/data_analysis_2020/tags/week03/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>The importance of tidy data</title>
-      <link>/data_analysis_2020/notes/tidy-data/</link>
-      <pubDate>Fri, 11 Sep 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/data_analysis_2020/notes/tidy-data/</guid>
-      <description>
-
-
-&lt;p&gt;Introduces the idea of &lt;strong&gt;tidy data&lt;/strong&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Data frames: Your new favorite data structure</title>
-      <link>/data_analysis_2020/notes/data-frames/</link>
-      <pubDate>Thu, 10 Sep 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/data_analysis_2020/notes/data-frames/</guid>
-      <description>
-
-
-&lt;p&gt;Discusses the data structure called data frames: what they are and why they are so important.&lt;/p&gt;
-</description>
-    </item>
     
     <item>
       <title>Week 3 Resources</title>
@@ -44,19 +18,6 @@
       
       <guid>/data_analysis_2020/resources/week03-resources/</guid>
       <description>  The RStudio list of cheat sheets. The Data Import, Data Transformation, Data Visualization, and RStudio IDE cheat sheets will be particularly valuable to you. R for Data Science Chapter 3 Hadley Wickham on Tidy data. Note that this old-ish paper uses the syntax of a package called plyr, which is a bit different from the tidyverse counterpart called dplyr.  </description>
-    </item>
-    
-    <item>
-      <title>Homework 3</title>
-      <link>/data_analysis_2020/homework/hw03/</link>
-      <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/data_analysis_2020/homework/hw03/</guid>
-      <description>
-
-
-&lt;p&gt;This homework, as well as homework 2, is due Wednesday Sept 16.
-</description>
     </item>
     
     <item>
@@ -70,6 +31,41 @@
 
 &lt;p&gt;Explains why it is so important to format your code well, and how you are expected to format your code for this class.&lt;/p&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>Getting help in R</title>
+      <link>/data_analysis_2020/notes/help/</link>
+      <pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/notes/help/</guid>
+      <description>
+
+
+&lt;p&gt;Introduces how to read documentation for R functions and packages, and how to get help from the internet.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Intro to packages</title>
+      <link>/data_analysis_2020/notes/packages/</link>
+      <pubDate>Tue, 08 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/notes/packages/</guid>
+      <description>
+
+
+&lt;p&gt;Explains what an R package is, how to install and load them, and discusses a particularly important set of packages called the tidyverse.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Homework 3</title>
+      <link>/data_analysis_2020/homework/hw02/</link>
+      <pubDate>Sun, 06 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/homework/hw02/</guid>
+      <description>&lt;p&gt;This homework, as well as homework 3, is due Wednesday Sept 16. Lecture notes coming ASAP.&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -6,18 +6,18 @@
     <description>Recent content in Posts on Reproducible Data Analysis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 09 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 16 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/data_analysis_2020/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Homework 3</title>
-      <link>/data_analysis_2020/post/homework-hw03-rmd/</link>
-      <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
+      <title>dplyr: Getting Started with Data Wrangling</title>
+      <link>/data_analysis_2020/post/dplyr-getting-started-with-data-wrangling/</link>
+      <pubDate>Wed, 16 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>/data_analysis_2020/post/homework-hw03-rmd/</guid>
-      <description>Reading  R for Data Science Chapter 3  Note you should have already read Chapter 1-2    </description>
+      <guid>/data_analysis_2020/post/dplyr-getting-started-with-data-wrangling/</guid>
+      <description>&lt;p&gt;Expands on the idea of &lt;a href=&#34;https://www.jstatsoft.org/article/view/v040i01&#34;&gt;split-apply-combine&lt;/a&gt; and how to use the &lt;strong&gt;dplyr&lt;/strong&gt; package.&lt;/p&gt;</description>
     </item>
     
   </channel>

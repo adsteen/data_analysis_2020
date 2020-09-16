@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Homework 5 - Reproducible Data Analysis</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Homework 5" />
+<meta property="og:description" content="
+
+
+Homework to practice data transformation, exploration, and plotting.
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/data_analysis_2020/homework/hw05/" />
+<meta property="article:published_time" content="2020-09-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-09-15T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Homework 5">
+<meta itemprop="description" content="
+
+
+Homework to practice data transformation, exploration, and plotting.
+">
+<meta itemprop="datePublished" content="2020-09-15T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-09-15T00:00:00+00:00" />
+<meta itemprop="wordCount" content="451">
+
+
+
+<meta itemprop="keywords" content="week05," />
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Homework 5"/>
+<meta name="twitter:description" content="
+
+
+Homework to practice data transformation, exploration, and plotting.
+"/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/data_analysis_2020/css/style.css">
+	<link rel="stylesheet" href="/data_analysis_2020/css/custom.css">
+
+	<link rel="shortcut icon" href="/data_analysis_2020/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/data_analysis_2020/" title="Reproducible Data Analysis" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/data_analysis_2020/img/svalbard_sky.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Reproducible Data Analysis</div>
+					<div class="logo__tagline">Public site for UT-Knoxville MICR 493/593; GEOL 490/590</div>
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Homework 5</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-15T00:00:00Z">2020-09-15</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/data_analysis_2020/categories/homework/" rel="category">homework</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		
+	</div>
+</div>
+<div class="content post__content clearfix">
+			</p>
+<div id="setup" class="section level1">
+<h1>Setup</h1>
+<p>This homework uses the <code>flights</code> data set from the <code>nycflights13</code> package. Make sure to install the package (once) and load it (each time you start a new R session):</p>
+<pre class="r"><code>install.packages(&quot;nycflights13&quot;)
+library(nycflights13)</code></pre>
+</div>
+<div id="using-rmarkdown" class="section level1">
+<h1>Using RMarkdown</h1>
+<p>You will submit this homework by creating an RMarkdown document, and posting the resulting markdown file to your github repository (`homework/hw_05/hw_05.md). Be sure to review the markdown lessons <a href="https://rmarkdown.rstudio.com/lesson-1.html">here</a>.</p>
+<p>**Your RMarkdown file should contain the code you use to answer the questions,
+the results of that code, and some text to explain what is going on.</p>
+<p>A couple of important notes:</p>
+<ul>
+<li>Create a new RMarkdown document from RStudio, <code>File -&gt; New File -&gt; R Notebook</code>. This will create an RMarkdown (.Rmd) file with some example text that you can delete (but maybe pay attention to it to learn more about how RMarkdown works.)</li>
+<li><strong>Change the output in the page header to <code>output: github_document</code></strong>. This will cause RStudio to ‘knit’ the .Rmd file to a <em>GitHub-flavored markdown</em> file with the extension .md, rather than the default HTML. RStudio can also ‘knit’ to PDF and Word documents, which is pretty handy in other situations.</li>
+<li>When you are done with the homework, press <code>knit</code> in RStudio to create the homework.</li>
+<li><strong>knitr</strong> creates an image file for each plot in your RMarkdown document. If your document is called <code>hw_05.Rmd</code>, it will create a couple of directories to save the image - something like <code>hw_05/hw_05-files/figure-markdown_strict/unnamed-chunk-1.png</code>. Be sure to add these to your git repository and push them to github along with the .Rmd and .md files, so that I can see them.</li>
+</ul>
+</div>
+<div id="split-apply-combine" class="section level1">
+<h1>Split-apply-combine</h1>
+<ol style="list-style-type: decimal">
+<li>Use <code>?nycflights13::flights</code> to see the documentation of flights. (You can’t really show this in an RMarkdown document, but please do it.)</li>
+<li>Use the <code>glimpse()</code> function to get a general sense of the <code>flights</code> data frame. How many rows and columns does <code>flights</code> have?</li>
+<li>Use <code>filter()</code> to create a data frame of just the flights that departed 2 hours late or more. What fraction of flights departed at least 2 hours late?</li>
+<li>Use <code>mutate()</code> and <code>paste0()</code> to create a column that contains the combined airline and flight number (e.g., “UA5041”).</li>
+<li>Use <code>group_by()</code>, <code>summarise()</code>, and <code>n()</code> to make a data frame showing how many flights each aircraft (<code>tail_num()</code>) flew for each carrier throughout the whole data set.</li>
+</ol>
+<p>If you do the last question correctly, you will get a confusing message like this: <code>\</code>summarise()` regrouping output by ‘carrier’ (override with `.groups` argument)`</p>
+<p>This ominous-looking warning is telling you that <code>summarise()</code> is returning a data frame that is grouped by <code>carrier</code>- which makes sense. <code>summarise()</code> creates a data frame with 1 row for each combination of grouping variables, but we probably don’t want our output to have each row in a separate group.</p>
+</div>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/data_analysis_2020/tags/week05/" rel="tag">week05</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/data_analysis_2020/homework/hw04/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Homework 4</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Andrew D. Steen.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/data_analysis_2020/js/menu.js"></script>
+<script src="/data_analysis_2020/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>
