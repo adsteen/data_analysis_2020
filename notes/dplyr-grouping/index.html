@@ -4,40 +4,40 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>dplyr part 4: combining operations with pipes - Reproducible Data Analysis</title>
+	<title>dplyr part 3: splitting data frames with group_by() - Reproducible Data Analysis</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		<meta property="og:title" content="dplyr part 4: combining operations with pipes" />
+		<meta property="og:title" content="dplyr part 3: splitting data frames with group_by()" />
 <meta property="og:description" content="
 
 
-Learning how to combine operations with the %&gt;% operator.
+Learning how to do the split part of split-apply-combine.
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/data_analysis_2020/notes/dplyr-grouping/" />
-<meta property="article:published_time" content="2020-09-18T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-09-18T00:00:00+00:00" />
+<meta property="article:published_time" content="2020-09-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-09-17T00:00:00+00:00" />
 
-		<meta itemprop="name" content="dplyr part 4: combining operations with pipes">
+		<meta itemprop="name" content="dplyr part 3: splitting data frames with group_by()">
 <meta itemprop="description" content="
 
 
-Learning how to combine operations with the %&gt;% operator.
+Learning how to do the split part of split-apply-combine.
 ">
-<meta itemprop="datePublished" content="2020-09-18T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2020-09-18T00:00:00+00:00" />
-<meta itemprop="wordCount" content="446">
+<meta itemprop="datePublished" content="2020-09-17T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-09-17T00:00:00+00:00" />
+<meta itemprop="wordCount" content="827">
 
 
 
 <meta itemprop="keywords" content="week05," />
 
 		<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="dplyr part 4: combining operations with pipes"/>
+<meta name="twitter:title" content="dplyr part 3: splitting data frames with group_by()"/>
 <meta name="twitter:description" content="
 
 
-Learning how to combine operations with the %&gt;% operator.
+Learning how to do the split part of split-apply-combine.
 "/>
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,10 +75,10 @@ Learning how to combine operations with the %&gt;% operator.
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">dplyr part 4: combining operations with pipes</h1>
+			<h1 class="post__title">dplyr part 3: splitting data frames with group_by()</h1>
 			<div class="post__meta meta">
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-18T00:00:00Z">2020-09-18</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/data_analysis_2020/categories/dplyr/" rel="category">dplyr</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-17T00:00:00Z">2020-09-17</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/data_analysis_2020/categories/dplyr/" rel="category">dplyr</a>
 	</span>
 </div></div>
 		</header>
@@ -89,47 +89,93 @@ Learning how to combine operations with the %&gt;% operator.
 	</div>
 </div>
 <div class="content post__content clearfix">
-			<p>By the end of dplyr lesson 3, you know how to split data frames into invisible groups using <code>group_by()</code> and perform arbitrary operations on each group using <code>summarise()</code> and <code>mutate()</code>.</p>
+			<p>So far you know how to drop rows and columns data frames (<code>filter()</code> and <code>select()</code>) and how to perform calculations on columns of the data frame (<code>summarise()</code> and <code>mutate()</code>).</p>
+<p>In order to carry out the <a href="https://www.jstatsoft.org/article/view/v040i01">split-apply-combine</a> approach, we need to split data frames into meaningful groups, and perform the same calculation on each group. For instance, we might want to calculate the average and standard deviation of flight distances for each airline.</p>
+<div id="grouping-before-calculations" class="section level1">
+<h1>Grouping before calculations</h1>
+<p>To do this, we’ll use the <code>group_by()</code> function. <code>group_by()</code> invisibly groups a data frame into groups (in this case, <code>carrier</code>s). We won’t see much when we use it:</p>
 <pre class="r"><code>library(tidyverse)
 library(nycflights13)
-
-# Get rid of rows that are missing tailnum or air_time
-cleaned_flights &lt;- filter(flights, !(is.na(tailnum) | is.na(air_time)))
-
-# Calculate average flight time for each unique airplane (tailnum)
-cleaned_grouped_flights &lt;- group_by(cleaned_flights, tailnum, carrier)
-mean_time_by_airplane &lt;- summarise(cleaned_grouped_flights,
-                                 mean.time = mean(air_time),
-                                 sd.time = sd(air_time))
-
-p_flighttimes &lt;- ggplot(mean_time_by_airplane, aes(x=carrier, y=mean.time)) + 
-  geom_boxplot() + 
-  ylab(&quot;average flight time, minutes&quot;)
-print(p_flighttimes)</code></pre>
-<p><img src="/data_analysis_2020/notes/2020-09-18-piping_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<p>This is really powerful! However, the code is kind of hard to read. We have to keep coming up with variable names that accurately describe what the data frame is, which can be a challenge.</p>
-<p>It would be nice for our code to match the way we would describe the operation:</p>
-<ol style="list-style-type: decimal">
-<li>First we want to remove every row from the <code>flights</code> data set that is missing <code>tailnum</code> or <code>air_time</code></li>
-<li>Then we want to group the resulting data frame by each combination of <code>tailnum</code> and <code>carrier</code></li>
-<li>Then, for each unique combination of those things, we want to calculate the mean and standard deviation of <code>air_time</code>.</li>
+grouped_flights &lt;- group_by(flights, carrier)
+glimpse(grouped_flights)</code></pre>
+<pre><code>## Rows: 336,776
+## Columns: 19
+## Groups: carrier [16]
+## $ year           &lt;int&gt; 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, …
+## $ month          &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ day            &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ dep_time       &lt;int&gt; 517, 533, 542, 544, 554, 554, 555, 557, 557, 558, 558,…
+## $ sched_dep_time &lt;int&gt; 515, 529, 540, 545, 600, 558, 600, 600, 600, 600, 600,…
+## $ dep_delay      &lt;dbl&gt; 2, 4, 2, -1, -6, -4, -5, -3, -3, -2, -2, -2, -2, -2, -…
+## $ arr_time       &lt;int&gt; 830, 850, 923, 1004, 812, 740, 913, 709, 838, 753, 849…
+## $ sched_arr_time &lt;int&gt; 819, 830, 850, 1022, 837, 728, 854, 723, 846, 745, 851…
+## $ arr_delay      &lt;dbl&gt; 11, 20, 33, -18, -25, 12, 19, -14, -8, 8, -2, -3, 7, -…
+## $ carrier        &lt;chr&gt; &quot;UA&quot;, &quot;UA&quot;, &quot;AA&quot;, &quot;B6&quot;, &quot;DL&quot;, &quot;UA&quot;, &quot;B6&quot;, &quot;EV&quot;, &quot;B6&quot;, …
+## $ flight         &lt;int&gt; 1545, 1714, 1141, 725, 461, 1696, 507, 5708, 79, 301, …
+## $ tailnum        &lt;chr&gt; &quot;N14228&quot;, &quot;N24211&quot;, &quot;N619AA&quot;, &quot;N804JB&quot;, &quot;N668DN&quot;, &quot;N39…
+## $ origin         &lt;chr&gt; &quot;EWR&quot;, &quot;LGA&quot;, &quot;JFK&quot;, &quot;JFK&quot;, &quot;LGA&quot;, &quot;EWR&quot;, &quot;EWR&quot;, &quot;LGA&quot;…
+## $ dest           &lt;chr&gt; &quot;IAH&quot;, &quot;IAH&quot;, &quot;MIA&quot;, &quot;BQN&quot;, &quot;ATL&quot;, &quot;ORD&quot;, &quot;FLL&quot;, &quot;IAD&quot;…
+## $ air_time       &lt;dbl&gt; 227, 227, 160, 183, 116, 150, 158, 53, 140, 138, 149, …
+## $ distance       &lt;dbl&gt; 1400, 1416, 1089, 1576, 762, 719, 1065, 229, 944, 733,…
+## $ hour           &lt;dbl&gt; 5, 5, 5, 5, 6, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, …
+## $ minute         &lt;dbl&gt; 15, 29, 40, 45, 0, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 59, …
+## $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-01 …</code></pre>
+<p>This looks the same as <code>flights</code>, except that <code>glimpse()</code> shows us that the data frame is now grouped by <code>carrier</code>, and that there are 16 unique groups.</p>
+<p>However, look what happens when we calculate average flight distance:</p>
+<pre class="r"><code>distance_summary &lt;- summarise(grouped_flights,
+                              mean.dist = mean(distance, na.rm = TRUE),
+                              sd.dist = sd(distance, na.rm = TRUE))</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre class="r"><code>print(distance_summary)</code></pre>
+<pre><code>## # A tibble: 16 x 3
+##    carrier mean.dist sd.dist
+##    &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;
+##  1 9E           530.   322. 
+##  2 AA          1340.   638. 
+##  3 AS          2402      0  
+##  4 B6          1069.   704. 
+##  5 DL          1237.   660. 
+##  6 EV           563.   287. 
+##  7 F9          1620      0  
+##  8 FL           665.   161. 
+##  9 HA          4983      0  
+## 10 MQ           570.   226. 
+## 11 OO           501.   206. 
+## 12 UA          1529.   799. 
+## 13 US           553.   584. 
+## 14 VX          2499.    88.0
+## 15 WN           996.   410. 
+## 16 YV           375.   160.</code></pre>
+<p>Now we have the mean and standard deviation of flight distance for each carrier separately! This would be a pain to do in Excel, or in basically any other programming language<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>!</p>
+<p>We can also group by multiple categories, to get a unique answer for each unique combination of variables:</p>
+<pre class="r"><code>finely_grouped_flights &lt;- group_by(flights, month, carrier)
+summarise(finely_grouped_flights, 
+          mean.dist = mean(distance, na.rm = TRUE),
+          sd.dist = sd(distance, na.rm = TRUE))</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;month&#39; (override with `.groups` argument)</code></pre>
+<pre><code>## # A tibble: 185 x 4
+## # Groups:   month [12]
+##    month carrier mean.dist sd.dist
+##    &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;
+##  1     1 9E           476.    334.
+##  2     1 AA          1350.    626.
+##  3     1 AS          2402       0 
+##  4     1 B6          1062.    681.
+##  5     1 DL          1220.    644.
+##  6     1 EV           522.    294.
+##  7     1 F9          1620       0 
+##  8     1 FL           691.    142.
+##  9     1 HA          4983       0 
+## 10     1 MQ           566.    223.
+## # … with 175 more rows</code></pre>
+<p>Almost every bit of data analysis we do will involve <code>summarise()</code> or <code>mutate()</code> operations on grouped data frames. This is one reason the idea of tidy data is so important: once we have every variable in its own column, we can split our data set by whatever combination of variables we want, and then apply the same calculation to each group.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Except the languages that are starting to copy tidyverse, for instance the pandas module in python, or the Julia language<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
-<p>The pipe operator, <code>%&gt;%</code>, allows us to do this. <code>%&gt;%</code> says "take the thing on the left, and feed as the first argument to the function on the right. So the following two statements are identical:</p>
-<pre class="r"><code>df_old_fashioned_way &lt;- summarise(flights, mean.dist = mean(distance, na.rm = TRUE))
-df_piped &lt;- flights %&gt;%
-  summarise(mean.dist = mean(distance, na.rm = TRUE))
-all_equal(df_old_fashioned_way, df_piped)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<p>The <code>all_equal()</code> function confirms that these data frames are the same! We would read the second R sentence as “Take the <code>flights</code> data frame, and feed it to the <code>summarise()</code> function, which will create a column called <code>mean.dist</code> which is the <code>mean()</code> function called on the <code>distance</code> column.”</p>
-<p>This is particularly powerful when we want to connect a bunch of operations into one statement:</p>
-<pre class="r"><code>flight_time_summary &lt;- flights %&gt;% # Start with flights
-  filter(!(is.na(tailnum) | is.na(air_time))) %&gt;% # Filter rows I don&#39;t want
-  group_by(tailnum, carrier) %&gt;% # Group the resulting data frame appropriately
-  summarise(mean.time = mean(air_time), # Calculate summary statistics
-            sd.time = sd(air_time))</code></pre>
-<pre><code>## `summarise()` regrouping output by &#39;tailnum&#39; (override with `.groups` argument)</code></pre>
-<p>Note that, for clarity, I start a new, indented line after each <code>%&gt;%</code>.</p>
-<p>Just remember when you’re reading piped statements, the function on the “recieving end” of the <code>%&gt;%</code> (i.e., the function to the right) <em>invisibly</em> is passed the object on the left of the pipe as its first argument. So <code>group_by(tailnum, carrier)</code> by itself doesn’t make any sense since <code>tailnum</code> is not an acceptable first argument to <code>group_by()</code>. But <code>flights %&gt;% group_by(tailnum, carrier)</code> is fine, because it is equivalent to <code>group_by(flights, tailnum, carrier)</code>.</p>
+</div>
 
 		</div>
 		<footer class="post__footer">
@@ -149,9 +195,15 @@ all_equal(df_old_fashioned_way, df_piped)</code></pre>
 
 <nav class="pager flex">
 	<div class="pager__item pager__item--prev">
-		<a class="pager__link" href="/data_analysis_2020/notes/dplyr-grouping/" rel="prev">
+		<a class="pager__link" href="/data_analysis_2020/notes/dplyr-calculating/" rel="prev">
 			<span class="pager__subtitle">«&thinsp;Previous</span>
-			<p class="pager__title">dplyr part 3: splitting data frames with group_by()</p>
+			<p class="pager__title">dplyr part 2: Performing calculations on data frames</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/data_analysis_2020/notes/dplyr-grouping/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">dplyr part 4: combining operations with pipes</p>
 		</a>
 	</div>
 </nav>

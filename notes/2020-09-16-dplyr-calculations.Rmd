@@ -10,6 +10,8 @@ draft: false
 
 Calculating values from data frames: `summarise()` and `mutate()`.
 
+<!--more-->
+
 # Calculations using data frames
 
 Broadly speaking, there are two kinds of calculations we'd want to perform on data frames, and two functions for doing these:

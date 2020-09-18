@@ -38,9 +38,22 @@
     </item>
     
     <item>
+      <title>dplyr part 2: Performing calculations on data frames</title>
+      <link>/data_analysis_2020/notes/dplyr-calculating/</link>
+      <pubDate>Wed, 16 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/notes/dplyr-calculating/</guid>
+      <description>
+
+
+&lt;p&gt;Calculating values from data frames: &lt;code&gt;summarise()&lt;/code&gt; and &lt;code&gt;mutate()&lt;/code&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>dplyr part 1: Choosing rows and columns</title>
       <link>/data_analysis_2020/notes/dplyr-choosing-rows-and-columns/</link>
-      <pubDate>Wed, 16 Sep 2020 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 15 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>/data_analysis_2020/notes/dplyr-choosing-rows-and-columns/</guid>
       <description>
@@ -48,17 +61,6 @@
 
 &lt;p&gt;Expands on the idea of &lt;a href=&#34;https://www.jstatsoft.org/article/view/v040i01&#34;&gt;split-apply-combine&lt;/a&gt; and how to use the &lt;strong&gt;dplyr&lt;/strong&gt; package.&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>dplyr part 2: Performing calculations on data frames</title>
-      <link>/data_analysis_2020/notes/dplyr-calculating/</link>
-      <pubDate>Wed, 16 Sep 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/data_analysis_2020/notes/dplyr-calculating/</guid>
-      <description>Calculating values from data frames: summarise() and mutate().
-Calculations using data frames Broadly speaking, there are two kinds of calculations we’d want to perform on data frames, and two functions for doing these:
- Calculations that return a single answer: summarise() Calculations that return one answer for every row in the data frame: mutate()  Before you write code, think: do I want a single answer for my data frame, or do I want a separate answer for each row of the data frame?</description>
     </item>
     
     <item>

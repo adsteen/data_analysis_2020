@@ -1,7 +1,7 @@
 ---
 title: 'dplyr part 1: Choosing rows and columns'
 author: ~
-date: '2020-09-16'
+date: '2020-09-15'
 slug: dplyr-choosing-rows-and-columns
 categories: [dplyr]
 tags: [week05]
