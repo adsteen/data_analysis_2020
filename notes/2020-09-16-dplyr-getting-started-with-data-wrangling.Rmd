@@ -1,11 +1,11 @@
 ---
-title: 'dplyr: Getting Started with Data Wrangling'
+title: 'dplyr part 1: Choosing rows and columns'
 author: ~
 date: '2020-09-16'
-slug: dplyr-getting-started-with-data-wrangling
-categories: [tidyverse]
+slug: dplyr-choosing-rows-and-columns
+categories: [dplyr]
 tags: [week05]
-draft: yes
+draft: false
 ---
 
 Expands on the idea of [split-apply-combine](https://www.jstatsoft.org/article/view/v040i01) and how to use the **dplyr** package.
@@ -14,13 +14,114 @@ Expands on the idea of [split-apply-combine](https://www.jstatsoft.org/article/v
 
 We've discussed how to do some basics in R: create scripts, add numbers, make simple plots. In this lesson, we begin working with **dplyr**, the package for performing split-apply-combine operations on data frames which is at heart of the tidyverse.
 
+# Getting started
+
 For this lesson, we'll use the `flights` data set in the **nycflights13** package. As usual, we'll install it (once) with `install.packages("nycflights13")` and load it (each time we open RStudio) using `library(nycflights13)`. 
 
 First let's get a sense of the structure of `flights`:
 
-```{r intro}
-asdf
+```{r intro, message=FALSE}
+library(tidyverse)
+library(nycflights13)
+
+glimpse(flights)
 ```
 
+We should also check the documentation for the data frame, using `?flights`. 
 
-asdf
+
+# Choose rows with `filter()` and logical operators
+
+Almost always, we want to clean our data file before we work with it. Typically that will involve removing data that we don't care about. The **dplyr** function `filter` is good for this.
+
+Let's make a data frame (tibble) containing only the flights in January:
+```{r}
+jan_flights <- filter(flights, month == 1)
+glimpse(jan_flights)
+```
+
+Note the `==` operator, which is not the same as `=`^[Although it is so common to mistake `=` for `==` that there is a special error message for it - try `filter(flights, month = 1`)]. This is called a [logical operator](https://r4ds.had.co.nz/transform.html#logical-operators), and it returns `TRUE` (if the two objects are equal) and `FALSE` otherwise. Like most R functions, it is *vectorized*:
+
+```{r}
+a <- c(1, 1, 1, 1)
+b <- c(1, 2, 1, 2)
+a == b
+```
+
+Thus, `filter()` is silently comparing the full vector of `month` values, all 336,776 elements of it, to a 336,776-long vector of `1`s. (Remember [vector recycling](https://www.r4ds.had.co/https://r4ds.had.co.nz/transform.html#mutate-funs)). `filter()` only returns the rows for which that comparison returns `TRUE`. 
+
+Other logical operators include `!=` (not equals; the `!` means 'not' - try typing `!TRUE` at the console), `&` ('and', returns `TRUE` if both sides are `TRUE`), and `|` ('or', returns `TRUE` if either side is `TRUE`). Play around with these a bit:
+
+```{r}
+TRUE | FALSE
+```
+```{r}
+FALSE & FALSE
+```
+```{r}
+TRUE != FALSE
+```
+
+`<` (less than), `<=` (less than or equal to), `>` (greater than), and `>=` (greater than or equal to) work pretty much the same way.
+
+We can combine these operators to make complicated operations:
+
+```{r}
+# Flights in January or February
+jan_or_feb <- filter(flights, month == 1 | month == 2)
+```
+
+```{r}
+# United Airlines flights on the 13th of hte month
+UA_13th <- filter(flights, carrier == "UA" & day == 13)
+```
+
+```{r}
+# Flights longer than 2000 miles
+longhaul <- filter(flights, distance > 2000)
+```
+
+### NAs will throw you off
+
+`NA` is a special constant in R that is useful for missing data. For instance, there are a bunch of flights in `flights` for which the `tailnum` is missing: 
+
+```{r}
+missing_tailnum <- filter(flights, is.na(tailnum))
+glimpse(missing_tailnum)
+```
+
+This is very useful, but you need to know that `NA` is 'contagious' with logical operators:
+
+```{r}
+a <- NA
+b <- NA
+a == b
+```
+You would think the answer would be `TRUE` because both `a` and `b` are `NA`, but in fact if there is an `NA` on either side of a logical operator, the operator will return `NA`. 
+
+Often we want to remove `NA` values from our calculations. For this, the `is.na()` function is useful: it returns `TRUE` for `NA`s and `FALSE` otherwise. `filter(flights, !is.na(tailnum))` would give us a data frame with only the rows that have a non-NA value for `tailnum`. 
+
+
+# Choose columns with `select()`
+
+If we want to choose a subset of columns from our data frame, we can use `select()`. This works similarly to `filter()` - it keeps the columns that match and throws away the rest.
+
+We can `select()` columns by name:
+
+```{r}
+select(flights, carrier, year)
+```
+or by pattern:
+
+```{r}
+select(flights, contains("hour"))
+```
+
+or by numeric position of the column in the data frame:
+
+```{r}
+select(flights, 1:3)
+```
+
+I tend to use `select()` much less often than `filter()` because, in general, it doesn't hurt us to have extra columns in our data frame. Most of the time, if we don't care about them, we can just ignore them. 
+

@@ -12,12 +12,16 @@
     
     
     <item>
-      <title>dplyr: Getting Started with Data Wrangling</title>
-      <link>/data_analysis_2020/post/dplyr-getting-started-with-data-wrangling/</link>
+      <title>Getting Started with dplyr: Choosing rows and columns</title>
+      <link>/data_analysis_2020/notes/dplyr-getting-started-with-data-wrangling/</link>
       <pubDate>Wed, 16 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>/data_analysis_2020/post/dplyr-getting-started-with-data-wrangling/</guid>
-      <description>&lt;p&gt;Expands on the idea of &lt;a href=&#34;https://www.jstatsoft.org/article/view/v040i01&#34;&gt;split-apply-combine&lt;/a&gt; and how to use the &lt;strong&gt;dplyr&lt;/strong&gt; package.&lt;/p&gt;</description>
+      <guid>/data_analysis_2020/notes/dplyr-getting-started-with-data-wrangling/</guid>
+      <description>
+
+
+&lt;p&gt;Expands on the idea of &lt;a href=&#34;https://www.jstatsoft.org/article/view/v040i01&#34;&gt;split-apply-combine&lt;/a&gt; and how to use the &lt;strong&gt;dplyr&lt;/strong&gt; package.&lt;/p&gt;
+</description>
     </item>
     
   </channel>

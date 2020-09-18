@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Getting Started with dplyr: Choosing rows and columns - Reproducible Data Analysis</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Getting Started with dplyr: Choosing rows and columns" />
+<meta property="og:description" content="
+
+
+Expands on the idea of split-apply-combine and how to use the dplyr package.
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/data_analysis_2020/notes/dplyr-getting-started-with-data-wrangling/" />
+<meta property="article:published_time" content="2020-09-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-09-16T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Getting Started with dplyr: Choosing rows and columns">
+<meta itemprop="description" content="
+
+
+Expands on the idea of split-apply-combine and how to use the dplyr package.
+">
+<meta itemprop="datePublished" content="2020-09-16T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-09-16T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1961">
+
+
+
+<meta itemprop="keywords" content="week05," />
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Getting Started with dplyr: Choosing rows and columns"/>
+<meta name="twitter:description" content="
+
+
+Expands on the idea of split-apply-combine and how to use the dplyr package.
+"/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/data_analysis_2020/css/style.css">
+	<link rel="stylesheet" href="/data_analysis_2020/css/custom.css">
+
+	<link rel="shortcut icon" href="/data_analysis_2020/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/data_analysis_2020/" title="Reproducible Data Analysis" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/data_analysis_2020/img/svalbard_sky.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Reproducible Data Analysis</div>
+					<div class="logo__tagline">Public site for UT-Knoxville MICR 493/593; GEOL 490/590</div>
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Getting Started with dplyr: Choosing rows and columns</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-16T00:00:00Z">2020-09-16</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/data_analysis_2020/categories/tidyverse/" rel="category">tidyverse</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<p>We’ve discussed how to do some basics in R: create scripts, add numbers, make simple plots. In this lesson, we begin working with <strong>dplyr</strong>, the package for performing split-apply-combine operations on data frames which is at heart of the tidyverse.</p>
+<div id="getting-started" class="section level1">
+<h1>Getting started</h1>
+<p>For this lesson, we’ll use the <code>flights</code> data set in the <strong>nycflights13</strong> package. As usual, we’ll install it (once) with <code>install.packages("nycflights13")</code> and load it (each time we open RStudio) using <code>library(nycflights13)</code>.</p>
+<p>First let’s get a sense of the structure of <code>flights</code>:</p>
+<pre class="r"><code>library(tidyverse)
+library(nycflights13)
+
+glimpse(flights)</code></pre>
+<pre><code>## Rows: 336,776
+## Columns: 19
+## $ year           &lt;int&gt; 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, …
+## $ month          &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ day            &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ dep_time       &lt;int&gt; 517, 533, 542, 544, 554, 554, 555, 557, 557, 558, 558,…
+## $ sched_dep_time &lt;int&gt; 515, 529, 540, 545, 600, 558, 600, 600, 600, 600, 600,…
+## $ dep_delay      &lt;dbl&gt; 2, 4, 2, -1, -6, -4, -5, -3, -3, -2, -2, -2, -2, -2, -…
+## $ arr_time       &lt;int&gt; 830, 850, 923, 1004, 812, 740, 913, 709, 838, 753, 849…
+## $ sched_arr_time &lt;int&gt; 819, 830, 850, 1022, 837, 728, 854, 723, 846, 745, 851…
+## $ arr_delay      &lt;dbl&gt; 11, 20, 33, -18, -25, 12, 19, -14, -8, 8, -2, -3, 7, -…
+## $ carrier        &lt;chr&gt; &quot;UA&quot;, &quot;UA&quot;, &quot;AA&quot;, &quot;B6&quot;, &quot;DL&quot;, &quot;UA&quot;, &quot;B6&quot;, &quot;EV&quot;, &quot;B6&quot;, …
+## $ flight         &lt;int&gt; 1545, 1714, 1141, 725, 461, 1696, 507, 5708, 79, 301, …
+## $ tailnum        &lt;chr&gt; &quot;N14228&quot;, &quot;N24211&quot;, &quot;N619AA&quot;, &quot;N804JB&quot;, &quot;N668DN&quot;, &quot;N39…
+## $ origin         &lt;chr&gt; &quot;EWR&quot;, &quot;LGA&quot;, &quot;JFK&quot;, &quot;JFK&quot;, &quot;LGA&quot;, &quot;EWR&quot;, &quot;EWR&quot;, &quot;LGA&quot;…
+## $ dest           &lt;chr&gt; &quot;IAH&quot;, &quot;IAH&quot;, &quot;MIA&quot;, &quot;BQN&quot;, &quot;ATL&quot;, &quot;ORD&quot;, &quot;FLL&quot;, &quot;IAD&quot;…
+## $ air_time       &lt;dbl&gt; 227, 227, 160, 183, 116, 150, 158, 53, 140, 138, 149, …
+## $ distance       &lt;dbl&gt; 1400, 1416, 1089, 1576, 762, 719, 1065, 229, 944, 733,…
+## $ hour           &lt;dbl&gt; 5, 5, 5, 5, 6, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, …
+## $ minute         &lt;dbl&gt; 15, 29, 40, 45, 0, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 59, …
+## $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-01 …</code></pre>
+<p>We should also check the documentation for the data frame, using <code>?flights</code>.</p>
+<div id="cleaning-our-data-with-filter-and-select" class="section level2">
+<h2>Cleaning our data with <code>filter()</code> and <code>select()</code></h2>
+<div id="get-rows-with-filter-and-logical-operators" class="section level3">
+<h3>Get rows with <code>filter()</code> and logical operators</h3>
+<p>Almost always, we want to clean our data file before we work with it. Typically that will involve removing data that we don’t care about. The <strong>dplyr</strong> function <code>filter</code> is good for this.</p>
+<p>Let’s make a data frame (tibble) containing only the flights in January:</p>
+<pre class="r"><code>jan_flights &lt;- filter(flights, month == 1)
+glimpse(jan_flights)</code></pre>
+<pre><code>## Rows: 27,004
+## Columns: 19
+## $ year           &lt;int&gt; 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, …
+## $ month          &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ day            &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ dep_time       &lt;int&gt; 517, 533, 542, 544, 554, 554, 555, 557, 557, 558, 558,…
+## $ sched_dep_time &lt;int&gt; 515, 529, 540, 545, 600, 558, 600, 600, 600, 600, 600,…
+## $ dep_delay      &lt;dbl&gt; 2, 4, 2, -1, -6, -4, -5, -3, -3, -2, -2, -2, -2, -2, -…
+## $ arr_time       &lt;int&gt; 830, 850, 923, 1004, 812, 740, 913, 709, 838, 753, 849…
+## $ sched_arr_time &lt;int&gt; 819, 830, 850, 1022, 837, 728, 854, 723, 846, 745, 851…
+## $ arr_delay      &lt;dbl&gt; 11, 20, 33, -18, -25, 12, 19, -14, -8, 8, -2, -3, 7, -…
+## $ carrier        &lt;chr&gt; &quot;UA&quot;, &quot;UA&quot;, &quot;AA&quot;, &quot;B6&quot;, &quot;DL&quot;, &quot;UA&quot;, &quot;B6&quot;, &quot;EV&quot;, &quot;B6&quot;, …
+## $ flight         &lt;int&gt; 1545, 1714, 1141, 725, 461, 1696, 507, 5708, 79, 301, …
+## $ tailnum        &lt;chr&gt; &quot;N14228&quot;, &quot;N24211&quot;, &quot;N619AA&quot;, &quot;N804JB&quot;, &quot;N668DN&quot;, &quot;N39…
+## $ origin         &lt;chr&gt; &quot;EWR&quot;, &quot;LGA&quot;, &quot;JFK&quot;, &quot;JFK&quot;, &quot;LGA&quot;, &quot;EWR&quot;, &quot;EWR&quot;, &quot;LGA&quot;…
+## $ dest           &lt;chr&gt; &quot;IAH&quot;, &quot;IAH&quot;, &quot;MIA&quot;, &quot;BQN&quot;, &quot;ATL&quot;, &quot;ORD&quot;, &quot;FLL&quot;, &quot;IAD&quot;…
+## $ air_time       &lt;dbl&gt; 227, 227, 160, 183, 116, 150, 158, 53, 140, 138, 149, …
+## $ distance       &lt;dbl&gt; 1400, 1416, 1089, 1576, 762, 719, 1065, 229, 944, 733,…
+## $ hour           &lt;dbl&gt; 5, 5, 5, 5, 6, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5, 6, 6, …
+## $ minute         &lt;dbl&gt; 15, 29, 40, 45, 0, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 59, …
+## $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-01 …</code></pre>
+<p>Note the <code>==</code> operator, which is not the same as <code>=</code><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. This is called a <a href="https://r4ds.had.co.nz/transform.html#logical-operators">logical operator</a>, and it returns <code>TRUE</code> (if the two objects are equal) and <code>FALSE</code> otherwise. Like most R functions, it is <em>vectorized</em>:</p>
+<pre class="r"><code>a &lt;- c(1, 1, 1, 1)
+b &lt;- c(1, 2, 1, 2)
+a == b</code></pre>
+<pre><code>## [1]  TRUE FALSE  TRUE FALSE</code></pre>
+<p>Thus, <code>filter()</code> is silently comparing the full vector of <code>month</code> values, all 336,776 elements of it, to a 336,776-long vector of <code>1</code>s. (Remember <a href="https://www.r4ds.had.co/https://r4ds.had.co.nz/transform.html#mutate-funs">vector recycling</a>). <code>filter()</code> only returns the rows for which that comparison returns <code>TRUE</code>.</p>
+<p>Other logical operators include <code>!=</code> (not equals; the <code>!</code> means ‘not’ - try typing <code>!TRUE</code> at the console), <code>&amp;</code> (‘and’, returns <code>TRUE</code> if both sides are <code>TRUE</code>), and <code>|</code> (‘or’, returns <code>TRUE</code> if either side is <code>TRUE</code>). Play around with these a bit:</p>
+<pre class="r"><code>TRUE | FALSE</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>FALSE &amp; FALSE</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>TRUE != FALSE</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p><code>&lt;</code> (less than), <code>&lt;=</code> (less than or equal to), <code>&gt;</code> (greater than), and <code>&gt;=</code> (greater than or equal to) work pretty much the same way.</p>
+<p>We can combine these operators to make complicated operations:</p>
+<pre class="r"><code># Flights in January or February
+jan_or_feb &lt;- filter(flights, month == 1 | month == 2)</code></pre>
+<pre class="r"><code># United Airlines flights on the 13th of hte month
+UA_13th &lt;- filter(flights, carrier == &quot;UA&quot; &amp; day == 13)</code></pre>
+<pre class="r"><code># Flights longer than 2000 miles
+longhaul &lt;- filter(flights, distance &gt; 2000)</code></pre>
+<div id="nas-will-throw-you-off" class="section level4">
+<h4>NAs will throw you off</h4>
+<p><code>NA</code> is a special constant in R that is useful for missing data. For instance, there are a bunch of flights in <code>flights</code> for which the <code>tailnum</code> is missing:</p>
+<pre class="r"><code>missing_tailnum &lt;- filter(flights, is.na(tailnum))
+glimpse(missing_tailnum)</code></pre>
+<pre><code>## Rows: 2,512
+## Columns: 19
+## $ year           &lt;int&gt; 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013, …
+## $ month          &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+## $ day            &lt;int&gt; 2, 2, 3, 3, 4, 4, 5, 7, 8, 9, 9, 10, 10, 11, 12, 12, 1…
+## $ dep_time       &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ sched_dep_time &lt;int&gt; 1545, 1601, 857, 645, 845, 1830, 840, 820, 1645, 755, …
+## $ dep_delay      &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ arr_time       &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ sched_arr_time &lt;int&gt; 1910, 1735, 1209, 952, 1015, 2044, 1001, 958, 1838, 10…
+## $ arr_delay      &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ carrier        &lt;chr&gt; &quot;AA&quot;, &quot;UA&quot;, &quot;UA&quot;, &quot;UA&quot;, &quot;9E&quot;, &quot;9E&quot;, &quot;9E&quot;, &quot;9E&quot;, &quot;US&quot;, …
+## $ flight         &lt;int&gt; 133, 623, 714, 719, 3405, 3716, 3422, 3317, 123, 4023,…
+## $ tailnum        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ origin         &lt;chr&gt; &quot;JFK&quot;, &quot;EWR&quot;, &quot;EWR&quot;, &quot;EWR&quot;, &quot;JFK&quot;, &quot;EWR&quot;, &quot;JFK&quot;, &quot;JFK&quot;…
+## $ dest           &lt;chr&gt; &quot;LAX&quot;, &quot;ORD&quot;, &quot;MIA&quot;, &quot;DFW&quot;, &quot;DCA&quot;, &quot;DTW&quot;, &quot;BOS&quot;, &quot;BUF&quot;…
+## $ air_time       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ distance       &lt;dbl&gt; 2475, 719, 1085, 1372, 213, 488, 187, 301, 529, 569, 1…
+## $ hour           &lt;dbl&gt; 15, 16, 8, 6, 8, 18, 8, 8, 16, 7, 12, 15, 7, 17, 9, 6,…
+## $ minute         &lt;dbl&gt; 45, 1, 57, 45, 45, 30, 40, 20, 45, 55, 51, 0, 0, 0, 0,…
+## $ time_hour      &lt;dttm&gt; 2013-01-02 15:00:00, 2013-01-02 16:00:00, 2013-01-03 …</code></pre>
+<p>This is very useful, but you need to know that <code>NA</code> is ‘contagious’ with logical operators:</p>
+<pre class="r"><code>a &lt;- NA
+b &lt;- NA
+a == b</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>You would think the answer would be <code>TRUE</code> because both <code>a</code> and <code>b</code> are <code>NA</code>, but in fact if there is an <code>NA</code> on either side of a logical operator, the operator will return <code>NA</code>.</p>
+<p>Often we want to remove <code>NA</code> values from our calculations. For this, the <code>is.na()</code> function is useful: it returns <code>TRUE</code> for <code>NA</code>s and <code>FALSE</code> otherwise. <code>filter(flights, !is.na(tailnum))</code> would give us a data frame with only the rows that have a non-NA value for <code>tailnum</code>.</p>
+<p>One last note: <code>NA</code>s also cause problems with many common statistical functions like <code>mean()</code> and <code>sum()</code>: by default, if there are any <code>NA</code>s in a vector, functions like these return <code>NA</code>. For instance:</p>
+<pre class="r"><code>my.vec &lt;- c(1, 2, 3, NA)
+mean(my.vec)</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>This is generally not what we want! To avoid this behavior, use the parameter <code>na.rm</code>:</p>
+<pre class="r"><code>mean(my.vec, na.rm = TRUE)</code></pre>
+<pre><code>## [1] 2</code></pre>
+</div>
+</div>
+<div id="pull-out-columns-with-select" class="section level3">
+<h3>Pull out columns with <code>select()</code></h3>
+<p>If we want to remove columns from our data frame, we can use <code>select()</code>. This works similarly to <code>filter()</code> - it keeps the columns that match and throws away the rest.</p>
+<p>We can <code>select()</code> columns by name</p>
+<pre class="r"><code>select(flights, carrier, year)</code></pre>
+<pre><code>## # A tibble: 336,776 x 2
+##    carrier  year
+##    &lt;chr&gt;   &lt;int&gt;
+##  1 UA       2013
+##  2 UA       2013
+##  3 AA       2013
+##  4 B6       2013
+##  5 DL       2013
+##  6 UA       2013
+##  7 B6       2013
+##  8 EV       2013
+##  9 B6       2013
+## 10 AA       2013
+## # … with 336,766 more rows</code></pre>
+<p>or by pattern:</p>
+<pre class="r"><code>select(flights, contains(&quot;hour&quot;))</code></pre>
+<pre><code>## # A tibble: 336,776 x 2
+##     hour time_hour          
+##    &lt;dbl&gt; &lt;dttm&gt;             
+##  1     5 2013-01-01 05:00:00
+##  2     5 2013-01-01 05:00:00
+##  3     5 2013-01-01 05:00:00
+##  4     5 2013-01-01 05:00:00
+##  5     6 2013-01-01 06:00:00
+##  6     5 2013-01-01 05:00:00
+##  7     6 2013-01-01 06:00:00
+##  8     6 2013-01-01 06:00:00
+##  9     6 2013-01-01 06:00:00
+## 10     6 2013-01-01 06:00:00
+## # … with 336,766 more rows</code></pre>
+<p>or by numeric position of the column in the data frame:</p>
+<pre class="r"><code>select(flights, 1:3)</code></pre>
+<pre><code>## # A tibble: 336,776 x 3
+##     year month   day
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##  1  2013     1     1
+##  2  2013     1     1
+##  3  2013     1     1
+##  4  2013     1     1
+##  5  2013     1     1
+##  6  2013     1     1
+##  7  2013     1     1
+##  8  2013     1     1
+##  9  2013     1     1
+## 10  2013     1     1
+## # … with 336,766 more rows</code></pre>
+<p>I tend to use <code>select()</code> much less often than <code>filter()</code> because, in general, it doesn’t hurt us to have extra columns in our data frame. Most of the time, if we don’t care about them, we can just ignore them.</p>
+</div>
+</div>
+</div>
+<div id="calculations-using-data-frames" class="section level1">
+<h1>Calculations using data frames</h1>
+<p>Broadly speaking, there are two kinds of calculations we’d want to perform on data frames, and two functions for doing these:</p>
+<ul>
+<li>Calculations that return a single answer: <code>summarise()</code></li>
+<li>Calculations that return one answer for every row in the data frame: <code>mutate()</code></li>
+</ul>
+<p>Let’s say we want to calculate the mean distance of all the flights in the data set, using the <code>mean()</code> function.
+Let’s say we want to convert the distance column from miles to kilometers. That will yied</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Although it is so common to mistake <code>=</code> for <code>==</code> that there is a special error message for it - try <code>filter(flights, month = 1</code>)<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/data_analysis_2020/tags/week05/" rel="tag">week05</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/data_analysis_2020/notes/intro-to-rmarkdown/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Intro to RMarkdown</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Andrew D. Steen.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/data_analysis_2020/js/menu.js"></script>
+<script src="/data_analysis_2020/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

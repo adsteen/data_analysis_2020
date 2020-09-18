@@ -1,0 +1,84 @@
+---
+title: 'dplyr part 2: Performing calculations on data frames'
+author: ~
+date: '2020-09-16'
+slug: dplyr-calculating
+categories: [dplyr]
+tags: [week05]
+draft: false
+---
+
+Calculating values from data frames: `summarise()` and `mutate()`.
+
+# Calculations using data frames
+
+Broadly speaking, there are two kinds of calculations we'd want to perform on data frames, and two functions for doing these:
+
+* Calculations that return a single answer: `summarise()`
+* Calculations that return one answer for every row in the data frame: `mutate()`
+
+**Before you write code, think: do I want a single answer for my data frame, or do I want a separate answer for each row of the data frame?**
+
+Let's say we want to calculate the mean of the flight distances. That will be just one number, so we want to use summarise^[Hadley Wickham is from New Zealand, so the tidyverse functions are generally in both British (`summarise`) and American (`summarize`) spellings. But I learned from reading Hadley's early guides, where he used the British spelling, and the habit stuck.]:
+
+```{r message=FALSE}
+library(tidyverse)
+library(nycflights13)
+summary_dist <- summarise(flights, mean.distance = mean(distance))
+summary_dist
+```
+
+We can read this R sentence as "summarize the `flights` data frame, creating a column called `mean.distance`, which will contain the results of the `mean(distance)` 
+
+# Single-answer calculations: `summarise()`
+
+Let's say we want to convert the distance column from miles to kilometers. That will yield a different number for each row of the data frame, so it will be a mutate
+
+One last note: `NA`s also cause problems with many common statistical functions like `mean()` and `sum()`: by default, if there are any `NA`s in a vector, functions like these return `NA`. For instance:
+
+```{r}
+my.vec <- c(1, 2, 3, NA)
+mean(my.vec)
+```
+
+This is generally not what we want! To avoid this behavior, use the parameter `na.rm`:
+```{r}
+mean(my.vec, na.rm = TRUE)
+```
+
+## Calculating multiple summary statistics
+
+Often we want to calculate multiple summary statistics at once: for instance, we if we're calculating the mean of some numbers, we also want to calculate the standard deviation. We do this by passing multiple summary functions to `summarise()`:
+
+```{r}
+mean_dist_and_sd <- summarise(flights, 
+                              mean.dist = mean(distance, na.rm = TRUE),
+                              sd.dist = sd(distance, na.rm = TRUE))
+mean_dist_and_sd
+```
+Note the formatting: because this line is getting to be pretty long, we should break it up into multiple lines and indent all lines after the first one. RStudio will do this for us automatically. R doesn't care about the indentation^[Unlike python, which cares very much about indentations!] but this makes it much easier for humans to read.
+
+# One-answer-per-row calculations: `mutate()`
+
+Let's now imagine that we want to know these distances in kilometers instead of miles. Simple enough: we want to multiply each distance by 1.61. Since that will provide one answer for each row of the data frame, we want `mutate()`.
+
+It might not seem like a big deal, but R makes this really easy due to [vectorization](https://bookdown.org/rdpeng/rprogdatascience/vectorized-operations.html). In some languages, we have to write a surprising amount of code to perform the same calculation on a bunch of different numbers!
+
+```{r}
+flights_km <- mutate(flights, dist.km = distance * 1.61)
+glimpse(flights_km)
+```
+
+We get back the same data frame, with a new column added: `dist.km`. Just like with `summarise()`, we can add add multiple new columns with one `mutate()` call:
+
+```{r}
+flights_obsolete_units <- mutate(flights, 
+                                 dist.furlongs = distance * 8,
+                                 dist.leagues = distance * 0.29,
+                                 dist.rods = distance * 320)
+select(flights_obsolete_units, distance, dist.furlongs, dist.leagues, dist.rods)
+```
+
+
+
+

@@ -1,0 +1,50 @@
+---
+title: 'dplyr part 3: splitting data frames with group_by()'
+author: ~
+date: '2020-09-17'
+slug: dplyr-grouping
+categories: [dplyr]
+tags: [week05]
+draft: no
+---
+
+Learning how to do the split part of split-apply-combine.
+
+<!--more-->
+
+So far you know how to drop rows and columns data frames (`filter()` and `select()`) and how to perform calculations on columns of the data frame (`summarise()` and `mutate()`). 
+
+In order to carry out the [split-apply-combine](https://www.jstatsoft.org/article/view/v040i01) approach, we need to split data frames into meaningful groups, and perform the same calculation on each group. For instance, we might want to calculate the average and standard deviation of flight distances for each airline.
+
+# Grouping before calculations
+
+To do this, we'll use the `group_by()` function. `group_by()` invisibly groups a data frame into groups (in this case, `carrier`s). We won't see much when we use it:
+
+```{r, message=FALSE}
+library(tidyverse)
+library(nycflights13)
+grouped_flights <- group_by(flights, carrier)
+glimpse(grouped_flights)
+```
+ This looks the same as `flights`, except that `glimpse()` shows us that the data frame is now grouped by `carrier`, and that there are 16 unique groups.
+ 
+ However, look what happens when we calculate average flight distance:
+ 
+```{r}
+distance_summary <- summarise(grouped_flights,
+                              mean.dist = mean(distance, na.rm = TRUE),
+                              sd.dist = sd(distance, na.rm = TRUE))
+print(distance_summary)
+```
+ 
+Now we have the mean and standard deviation of flight distance for each carrier separately! This would be a pain to do in Excel, or in basically any other programming language^[Except the languages that are starting to copy tidyverse, for instance the pandas module in python, or the Julia language]!
+
+We can also group by multiple categories, to get a unique answer for each unique combination of variables:
+
+```{r}
+finely_grouped_flights <- group_by(flights, month, carrier)
+summarise(finely_grouped_flights, 
+          mean.dist = mean(distance, na.rm = TRUE),
+          sd.dist = sd(distance, na.rm = TRUE))
+```
+Almost every bit of data analysis we do will involve `summarise()` or `mutate()` operations on grouped data frames. This is one reason the idea of tidy data is so important: once we have every variable in its own column, we can split our data set by whatever combination of variables we want, and then apply the same calculation to each group.

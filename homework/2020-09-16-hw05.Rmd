@@ -47,4 +47,7 @@ A couple of important notes:
 
 If you do the last question correctly, you will get a confusing message like this: `\`summarise()\` regrouping output by 'carrier' (override with \`.groups\` argument)`
 
-This ominous-looking warning is telling you that `summarise()` is returning a data frame that is grouped by `carrier`- which makes sense. `summarise()` creates a data frame with 1 row for each combination of grouping variables, but we probably don't want our output to have each row in a separate group.
+This ominous-looking message is telling you that `summarise()` is returning a data frame that is grouped by `carrier`- which makes sense. `summarise()` creates a data frame with 1 row for each combination of grouping variables, but we probably don't want our output to have each row in a separate group. We always want to read messages and warnings that R gives us, but this one is fine.
+
+
+
