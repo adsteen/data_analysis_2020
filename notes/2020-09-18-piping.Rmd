@@ -1,0 +1,66 @@
+---
+title: 'dplyr part 4: combining operations with pipes'
+author: ~
+date: '2020-09-18'
+slug: dplyr-grouping
+categories: [dplyr]
+tags: [week05]
+draft: no
+---
+
+Learning how to combine operations with the `%>%` operator.
+
+<!--more-->
+
+By the end of dplyr lesson 3, you know how to split data frames into invisible groups using `group_by()` and perform arbitrary operations on each group using `summarise()` and `mutate()`. 
+
+```{r, message = FALSE}
+library(tidyverse)
+library(nycflights13)
+
+# Get rid of rows that are missing tailnum or air_time
+cleaned_flights <- filter(flights, !(is.na(tailnum) | is.na(air_time)))
+
+# Calculate average flight time for each unique airplane (tailnum)
+cleaned_grouped_flights <- group_by(cleaned_flights, tailnum, carrier)
+mean_time_by_airplane <- summarise(cleaned_grouped_flights,
+                                 mean.time = mean(air_time),
+                                 sd.time = sd(air_time))
+
+p_flighttimes <- ggplot(mean_time_by_airplane, aes(x=carrier, y=mean.time)) + 
+  geom_boxplot() + 
+  ylab("average flight time, minutes")
+print(p_flighttimes)
+```
+
+This is really powerful! However, the code is kind of hard to read. We have to keep coming up with variable names that accurately describe what the data frame is, which can be a challenge.
+
+It would be nice for our code to match the way we would describe the operation:
+
+1. First we want to remove every row from the `flights` data set that is missing `tailnum` or `air_time`
+2. Then we want to group the resulting data frame by each combination of `tailnum` and `carrier`
+3. Then, for each unique combination of those things, we want to calculate the mean and standard deviation of `air_time`.
+
+The pipe operator, `%>%`, allows us to do this. `%>%` says "take the thing on the left, and feed as the first argument to the function on the right. So the following two statements are identical: 
+```{r}
+df_old_fashioned_way <- summarise(flights, mean.dist = mean(distance, na.rm = TRUE))
+df_piped <- flights %>%
+  summarise(mean.dist = mean(distance, na.rm = TRUE))
+all_equal(df_old_fashioned_way, df_piped)
+```
+The `all_equal()` function confirms that these data frames are the same! We would read the second R sentence as "Take the `flights` data frame, and feed it to the `summarise()` function, which will create a column called `mean.dist` which is the `mean()` function called on the `distance` column."
+
+This is particularly powerful when we want to connect a bunch of operations into one statement:
+
+```{r}
+flight_time_summary <- flights %>% # Start with flights
+  filter(!(is.na(tailnum) | is.na(air_time))) %>% # Filter rows I don't want
+  group_by(tailnum, carrier) %>% # Group the resulting data frame appropriately
+  summarise(mean.time = mean(air_time), # Calculate summary statistics
+            sd.time = sd(air_time))
+```
+
+Note that, for clarity, I start a new, indented line after each `%>%`.
+
+Just remember when you're reading piped statements, the function on the "recieving end" of the `%>%` (i.e., the function to the right) *invisibly* is passed the object on the left of the pipe as its first argument. So `group_by(tailnum, carrier)` by itself doesn't make any sense since `tailnum` is not an acceptable first argument to `group_by()`. But `flights %>% group_by(tailnum, carrier)` is fine, because it is equivalent to `group_by(flights, tailnum, carrier)`.
+
