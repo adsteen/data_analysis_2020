@@ -2,7 +2,7 @@
 title: 'dplyr part 4: combining operations with pipes'
 author: ~
 date: '2020-09-18'
-slug: dplyr-combining
+slug: dplyr-piping
 categories: [dplyr]
 tags: [week05]
 draft: no
