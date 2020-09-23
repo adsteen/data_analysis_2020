@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/data_analysis_2020/categories/</loc>
+    <lastmod>2020-09-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/data_analysis_2020/categories/homework/</loc>
+    <lastmod>2020-09-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/data_analysis_2020/homework/homework-6/</loc>
     <lastmod>2020-09-23T00:00:00+00:00</lastmod>
   </url>
@@ -18,8 +28,13 @@
   </url>
   
   <url>
-    <loc>/data_analysis_2020/categories/</loc>
-    <lastmod>2020-09-18T00:00:00+00:00</lastmod>
+    <loc>/data_analysis_2020/tags/</loc>
+    <lastmod>2020-09-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/data_analysis_2020/tags/week06/</loc>
+    <lastmod>2020-09-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -34,11 +49,6 @@
   
   <url>
     <loc>/data_analysis_2020/notes/</loc>
-    <lastmod>2020-09-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/data_analysis_2020/tags/</loc>
     <lastmod>2020-09-18T00:00:00+00:00</lastmod>
   </url>
   
@@ -63,11 +73,6 @@
   </url>
   
   <url>
-    <loc>/data_analysis_2020/categories/homework/</loc>
-    <lastmod>2020-09-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/data_analysis_2020/homework/hw05/</loc>
     <lastmod>2020-09-15T00:00:00+00:00</lastmod>
   </url>
@@ -78,17 +83,12 @@
   </url>
   
   <url>
-    <loc>/data_analysis_2020/categories/rmarkdown/</loc>
+    <loc>/data_analysis_2020/categories/notes/</loc>
     <lastmod>2020-09-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/data_analysis_2020/tags/data-wrangling/</loc>
-    <lastmod>2020-09-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/data_analysis_2020/categories/notes/</loc>
     <lastmod>2020-09-11T00:00:00+00:00</lastmod>
   </url>
   

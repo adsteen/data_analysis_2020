@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>week06 on Reproducible Data Analysis</title>
+    <link>/data_analysis_2020/tags/week06/</link>
+    <description>Recent content in week06 on Reproducible Data Analysis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 Sep 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/data_analysis_2020/tags/week06/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Homework 6</title>
+      <link>/data_analysis_2020/homework/homework-6/</link>
+      <pubDate>Wed, 23 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/homework/homework-6/</guid>
+      <description>&lt;p&gt;Homework 6 is due Wednesday, Sept 30.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
