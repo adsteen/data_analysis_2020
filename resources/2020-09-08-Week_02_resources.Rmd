@@ -11,6 +11,7 @@ draft: false
 
 Resources for week 2.
 <!--more-->
+[R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/)
 
 ```{r setup, echo = FALSE}
 knitr::opts_chunk$set(eval=FALSE)
@@ -28,3 +29,5 @@ To do that:
 * Press the green "commit changes" button at the bottom of the screen
 * Press the "pull requests" tab near the top of the screen, and then press the green "new pull request" button. Add a message in the box, and type "create pull request". This will send a request to me to incorporate your changes into the git repo.
 
+* [R Function of the Day](http://rfunction.com/)
+* [GitHub for Beginners](https://towardsdatascience.com/getting-started-with-git-and-github-6fcd0f2d4ac6)
