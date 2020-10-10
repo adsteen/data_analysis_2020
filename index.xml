@@ -6,10 +6,19 @@
     <description>Recent content on Reproducible Data Analysis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 24 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 07 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/data_analysis_2020/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Homework 8: More Data Wrangling</title>
+      <link>/data_analysis_2020/homework/homework-8/</link>
+      <pubDate>Wed, 07 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/homework/homework-8/</guid>
+      <description>&lt;p&gt;Homework 8 is nominally due Wednesday, October 14. I&amp;rsquo;m posting this a bit late, it is somewhat of a bigger homework, and I expect that a lot of people will be late on it. That&amp;rsquo;s fine.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Homework 7: Badplot</title>
