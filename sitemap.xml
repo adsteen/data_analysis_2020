@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/data_analysis_2020/tags/base-r/</loc>
+    <lastmod>2020-10-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/data_analysis_2020/categories/base-r/</loc>
+    <lastmod>2020-10-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/data_analysis_2020/categories/</loc>
     <lastmod>2020-10-07T00:00:00+00:00</lastmod>
   </url>
@@ -23,6 +33,11 @@
   </url>
   
   <url>
+    <loc>/data_analysis_2020/notes/</loc>
+    <lastmod>2020-10-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/data_analysis_2020/</loc>
     <lastmod>2020-10-07T00:00:00+00:00</lastmod>
   </url>
@@ -34,6 +49,11 @@
   
   <url>
     <loc>/data_analysis_2020/tags/week08/</loc>
+    <lastmod>2020-10-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/data_analysis_2020/notes/working-with-factors/</loc>
     <lastmod>2020-10-07T00:00:00+00:00</lastmod>
   </url>
   
@@ -64,11 +84,6 @@
   
   <url>
     <loc>/data_analysis_2020/notes/dplyr-piping/</loc>
-    <lastmod>2020-09-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/data_analysis_2020/notes/</loc>
     <lastmod>2020-09-18T00:00:00+00:00</lastmod>
   </url>
   

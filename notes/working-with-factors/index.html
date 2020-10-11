@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Working with factors: Cut that toxicity out of your life - Reproducible Data Analysis</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Working with factors: Cut that toxicity out of your life" />
+<meta property="og:description" content="
+
+
+Working with factors, which are dangerous and generally to be avoided.
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/data_analysis_2020/notes/working-with-factors/" />
+<meta property="article:published_time" content="2020-10-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-10-07T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Working with factors: Cut that toxicity out of your life">
+<meta itemprop="description" content="
+
+
+Working with factors, which are dangerous and generally to be avoided.
+">
+<meta itemprop="datePublished" content="2020-10-07T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-10-07T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1380">
+
+
+
+<meta itemprop="keywords" content="week08," />
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Working with factors: Cut that toxicity out of your life"/>
+<meta name="twitter:description" content="
+
+
+Working with factors, which are dangerous and generally to be avoided.
+"/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/data_analysis_2020/css/style.css">
+	<link rel="stylesheet" href="/data_analysis_2020/css/custom.css">
+
+	<link rel="shortcut icon" href="/data_analysis_2020/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/data_analysis_2020/" title="Reproducible Data Analysis" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/data_analysis_2020/img/svalbard_sky.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Reproducible Data Analysis</div>
+					<div class="logo__tagline">Public site for UT-Knoxville MICR 493/593; GEOL 490/590</div>
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Working with factors: Cut that toxicity out of your life</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-10-07T00:00:00Z">2020-10-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/data_analysis_2020/categories/base-r/" rel="category">base R</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<p>Let’s take a look at the <code>diamonds</code> data set that comes in the <strong>ggplot2</strong> package. Make sure you understand how the pipe operator is working here:</p>
+<pre class="r"><code>library(tidyverse)
+
+diamonds %&gt;%
+  glimpse()</code></pre>
+<pre><code>## Rows: 53,940
+## Columns: 10
+## $ carat   &lt;dbl&gt; 0.23, 0.21, 0.23, 0.29, 0.31, 0.24, 0.24, 0.26, 0.22, 0.23, 0…
+## $ cut     &lt;ord&gt; Ideal, Premium, Good, Premium, Good, Very Good, Very Good, Ve…
+## $ color   &lt;ord&gt; E, E, E, I, J, J, I, H, E, H, J, J, F, J, E, E, I, J, J, J, I…
+## $ clarity &lt;ord&gt; SI2, SI1, VS1, VS2, SI2, VVS2, VVS1, SI1, VS2, VS1, SI1, VS1,…
+## $ depth   &lt;dbl&gt; 61.5, 59.8, 56.9, 62.4, 63.3, 62.8, 62.3, 61.9, 65.1, 59.4, 6…
+## $ table   &lt;dbl&gt; 55, 61, 65, 58, 58, 57, 57, 55, 61, 61, 55, 56, 61, 54, 62, 5…
+## $ price   &lt;int&gt; 326, 326, 327, 334, 335, 336, 336, 337, 337, 338, 339, 340, 3…
+## $ x       &lt;dbl&gt; 3.95, 3.89, 4.05, 4.20, 4.34, 3.94, 3.95, 4.07, 3.87, 4.00, 4…
+## $ y       &lt;dbl&gt; 3.98, 3.84, 4.07, 4.23, 4.35, 3.96, 3.98, 4.11, 3.78, 4.05, 4…
+## $ z       &lt;dbl&gt; 2.43, 2.31, 2.31, 2.63, 2.75, 2.48, 2.47, 2.53, 2.49, 2.39, 2…</code></pre>
+<p>Look at the columns <code>cut</code>, <code>color</code>, and <code>clarity</code>: they have values like <code>Ideal</code>, <code>E</code> and <code>SI2</code>. Looks like a character vector, right? Except that, under the column names, we see that their type isn’t listed as <code>&lt;chr&gt;</code>, it is listed as <code>&lt;ord&gt;</code>. What is that about?</p>
+<p>Now let’s try something weird: we’ll convert these to a numeric vector. This shouldn’t work, right? It doesn’t make and sense to convert a character to a number; R should return a bunch of <code>NA()</code> values.</p>
+<pre class="r"><code>diamonds %&gt;%
+  summarise(color.numeric = as.numeric(color)) %&gt;%
+  head()</code></pre>
+<pre><code>## # A tibble: 6 x 1
+##   color.numeric
+##           &lt;dbl&gt;
+## 1             2
+## 2             2
+## 3             2
+## 4             6
+## 5             7
+## 6             7</code></pre>
+<p>Wild! R converts these to numbers! But why?</p>
+<div id="factors-are-heavily-disguised-vectors-of-integers" class="section level2">
+<h2>Factors are heavily-disguised vectors of integers</h2>
+<p>The reason that R can do this is that the <code>cut</code>, <code>color</code>, and <code>clarity</code> vectors are <em>factors</em>, <strong>which are actually labeled vectors of integers</strong>. (Specifically, these vectors are <em>ordered factors</em>, on which more later).</p>
+<p>Although R displays factors as character, it stores them in memory as integers. Each integer has a character label, like <code>Ideal</code> or <code>Premium</code>. There are two advantages to storing data that way:</p>
+<ul>
+<li>For a larger data set, it can save some memory. A character vector that contains <code>Ideal</code> repeated 1000 times, has to store the characters <code>Ideal</code> 1000 times. A factor would store the integer <code>1</code> 1000 times, and would only store the label <code>Ideal</code> once.</li>
+<li>For certain statistical procedures it is important to code “levels” as numbers.</li>
+</ul>
+<p>We call the labels of a factor “levels”. We can see these as follows:</p>
+<pre class="r"><code>diamonds %&gt;%
+  summarise(cut.levels = levels(cut))</code></pre>
+<pre><code>## # A tibble: 5 x 1
+##   cut.levels
+##   &lt;chr&gt;     
+## 1 Fair      
+## 2 Good      
+## 3 Very Good 
+## 4 Premium   
+## 5 Ideal</code></pre>
+</div>
+<div id="adding-and-removing-levels" class="section level2">
+<h2>Adding and removing levels</h2>
+<p>R does not allow us to add a new level to a factor without some work. See what happens when we concatenate a string with a factor:</p>
+<pre class="r"><code>new.vector &lt;- c(&quot;new label&quot;, diamonds$cut)
+class(new.vector)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>R has coerced the factor to a character vector, because it refuses to add a new level to <code>diamonds$cut</code>.</p>
+<p>Similarly, let’s try to replace the first element of <code>diamonds$cut</code> with something new:</p>
+<pre class="r"><code>diamonds_modified &lt;- diamonds
+diamonds_modified$cut[1] &lt;- &quot;new label&quot;</code></pre>
+<pre><code>## Warning in `[&lt;-.factor`(`*tmp*`, 1, value = structure(c(NA, 4L, 2L, 4L, :
+## invalid factor level, NA generated</code></pre>
+<pre class="r"><code>head(diamonds_modified$cut)</code></pre>
+<pre><code>## [1] &lt;NA&gt;      Premium   Good      Premium   Good      Very Good
+## Levels: Fair &lt; Good &lt; Very Good &lt; Premium &lt; Ideal</code></pre>
+<p>Instead of changing the first element to <code>new label</code>, it is <code>NA</code>, because there is no “new label” level to <code>diamonds_modified$cut</code>.</p>
+</div>
+<div id="loading-data" class="section level2">
+<h2>Loading data</h2>
+<p>One issue with factors is that <code>read.csv()</code> and the other base R functions for reading text files sometimes convert string (text) columns to factors. This behavior is set by the <code>stringsAsFactors</code> argument, which defaulted to <code>TRUE</code> prior to R 4.0. (Since R 4.0 it defaults to the value of the global <code>stringsAsFactors</code> value, which by default is <code>FALSE</code>).</p>
+<p>I encourage you to always use the <strong>tidyverse</strong> functions for reading data, such as <code>read_csv()</code>, rather than the base R alternatives (<code>read.csv()</code>). These default to reading string columns as characters.</p>
+<div id="potential-disasters-with-hand-entered-data" class="section level3">
+<h3>Potential disasters with hand-entered data</h3>
+<p>One reason this can cause problems: imagine that you have a data set full of numbers which has been entered by hand. If the data set is of any size, it is very likely that someone made a mistake entering the numbers: perhaps there is a stray letter, or, worse, an accidental space character after one of the numbers.</p>
+<p>Since that data set contains a character value, the entire column must be coerced to either a factor or a character vector. Imagine you have a dataset that looks like this:</p>
+<table>
+<thead>
+<tr class="header">
+<th>label.column</th>
+<th>numeric.column</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>sample 1</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>sample 2</td>
+<td>17</td>
+</tr>
+<tr class="odd">
+<td>sample 3</td>
+<td>23,</td>
+</tr>
+</tbody>
+</table>
+<p>The comma after <code>23</code> causes the column to be interpreted as text.</p>
+<pre class="r"><code>num.fac &lt;- factor(c(5, 17, &quot;23,&quot;))</code></pre>
+<p>We could convert this to a numeric vector as <code>as.numeric()</code>, but like we saw above, this doesn’t give us results that we want:</p>
+<pre class="r"><code>as.numeric(num.fac)</code></pre>
+<pre><code>## [1] 3 1 2</code></pre>
+<p>These are numbers, but they’re not the numbers in our original dataset!</p>
+<p>Instead, they have been given factor levels <strong>based on their position in alphabetical order of characters</strong>: <code>23,</code> starts with <code>2</code> so it comes after <code>17</code> and before <code>5</code> in alphabetical order.</p>
+<p>Instead, we want to convert the factor to a <em>character</em> vector first, <em>then</em> convert the character vector to a numeric vector:</p>
+<pre class="r"><code>corrected.vec &lt;- as.numeric(as.character(num.fac))</code></pre>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<pre class="r"><code>corrected.vec</code></pre>
+<pre><code>## [1]  5 17 NA</code></pre>
+<p>Now we have an <code>NA</code> instead of the 23, but at least the correctly-entered numbers stay intact.</p>
+<p>Finally, in order to figure out which rows are causing the problem, we can use the <code>which()</code> function:</p>
+<pre class="r"><code>which(is.na(corrected.vec))</code></pre>
+<pre><code>## [1] 3</code></pre>
+<p>We can see from this that the problem was in the third row of the source data. We can go back to the source data file to see what’s wrong with that entry.</p>
+</div>
+</div>
+<div id="making-factors-work-in-your-favor" class="section level1">
+<h1>Making factors work in your favor</h1>
+<p>There is one situation where factors can be useful in the tidyverse: when you want character data to appear in non-alphabetical order, particularly in plots.</p>
+<p>Let’s go back to the <code>diamonds</code> datase:</p>
+<pre class="r"><code>levels(diamonds$cut)</code></pre>
+<pre><code>## [1] &quot;Fair&quot;      &quot;Good&quot;      &quot;Very Good&quot; &quot;Premium&quot;   &quot;Ideal&quot;</code></pre>
+<p>Contrary to what I mentioned above, this is not in alphabetical order. However, it seems to be in a logical order of increasing quality: <code>Good</code> is better than <code>Fair</code>, <code>Very Good</code> is better than <code>Good</code>, and so on. This is probably the order in which we want to</p>
+<p>That’s because <code>cut</code> is an <em>ordered</em> factor. We can create ordered factors using the <strong>forcats</strong> package. I won’t go into detail about this, but we might want to order a factor by a numerical value, for instance <code>carat</code>:</p>
+<pre class="r"><code>diamonds_reordered &lt;- diamonds %&gt;%
+  mutate(reordered.cut = fct_reorder(.f = cut, .x = carat, .fun = median, .desc = TRUE))
+glimpse(diamonds_reordered)</code></pre>
+<pre><code>## Rows: 53,940
+## Columns: 11
+## $ carat         &lt;dbl&gt; 0.23, 0.21, 0.23, 0.29, 0.31, 0.24, 0.24, 0.26, 0.22, 0…
+## $ cut           &lt;ord&gt; Ideal, Premium, Good, Premium, Good, Very Good, Very Go…
+## $ color         &lt;ord&gt; E, E, E, I, J, J, I, H, E, H, J, J, F, J, E, E, I, J, J…
+## $ clarity       &lt;ord&gt; SI2, SI1, VS1, VS2, SI2, VVS2, VVS1, SI1, VS2, VS1, SI1…
+## $ depth         &lt;dbl&gt; 61.5, 59.8, 56.9, 62.4, 63.3, 62.8, 62.3, 61.9, 65.1, 5…
+## $ table         &lt;dbl&gt; 55, 61, 65, 58, 58, 57, 57, 55, 61, 61, 55, 56, 61, 54,…
+## $ price         &lt;int&gt; 326, 326, 327, 334, 335, 336, 336, 337, 337, 338, 339, …
+## $ x             &lt;dbl&gt; 3.95, 3.89, 4.05, 4.20, 4.34, 3.94, 3.95, 4.07, 3.87, 4…
+## $ y             &lt;dbl&gt; 3.98, 3.84, 4.07, 4.23, 4.35, 3.96, 3.98, 4.11, 3.78, 4…
+## $ z             &lt;dbl&gt; 2.43, 2.31, 2.31, 2.63, 2.75, 2.48, 2.47, 2.53, 2.49, 2…
+## $ reordered.cut &lt;ord&gt; Ideal, Premium, Good, Premium, Good, Very Good, Very Go…</code></pre>
+<p>Now <code>reordered.cut</code> is in order of decreasing median value of <code>carat</code>;</p>
+<pre class="r"><code>ggplot(diamonds_reordered, aes(x=reordered.cut, y=carat)) + 
+  geom_boxplot() + 
+  scale_y_log10()</code></pre>
+<p><img src="/data_analysis_2020/notes/2020-10-07-factors_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/data_analysis_2020/tags/week08/" rel="tag">week08</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/data_analysis_2020/notes/dplyr-piping/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">dplyr part 4: combining operations with pipes</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Andrew D. Steen.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/data_analysis_2020/js/menu.js"></script>
+<script src="/data_analysis_2020/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

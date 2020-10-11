@@ -1,0 +1,147 @@
+---
+title: 'Working with factors: Cut that toxicity out of your life'
+author: ~
+date: '2020-10-07'
+slug: working-with-factors
+categories: [base R]
+tags: [week08]
+draft: no
+---
+
+Working with factors, which are dangerous and generally to be avoided.
+
+<!--more-->
+
+Let's take a look at the `diamonds` data set that comes in the **ggplot2** package. Make sure you understand how the pipe operator is working here:
+
+```{r, message=FALSE}
+library(tidyverse)
+
+diamonds %>%
+  glimpse()
+```
+
+Look at the columns `cut`, `color`, and `clarity`: they have values like `Ideal`, `E` and `SI2`. Looks like a character vector, right? Except that, under the column names, we see that their type isn't listed as `<chr>`, it is listed as `<ord>`. What is that about?
+
+Now let's try something weird: we'll convert these to a numeric vector. This shouldn't work, right? It doesn't make and sense to convert a character to a number; R should return a bunch of `NA()` values. 
+
+```{r}
+diamonds %>%
+  summarise(color.numeric = as.numeric(color)) %>%
+  head()
+```
+
+
+Wild! R converts these to numbers! But why?
+
+## Factors are heavily-disguised vectors of integers
+
+The reason that R can do this is that the `cut`, `color`, and `clarity` vectors are *factors*, **which are actually labeled vectors of integers**. (Specifically, these vectors are *ordered factors*, on which more later). 
+
+Although R displays factors as character, it stores them in memory as integers. Each integer has a character label, like `Ideal` or `Premium`. There are two advantages to storing data that way:
+
+* For a larger data set, it can save some memory. A character vector that contains `Ideal` repeated 1000 times, has to store the characters `Ideal` 1000 times. A factor would store the integer `1` 1000 times, and would only store the label `Ideal` once. 
+* For certain statistical procedures it is important to code "levels" as numbers.
+
+We call the labels of a factor "levels". We can see these as follows:
+
+```{r}
+diamonds %>%
+  summarise(cut.levels = levels(cut))
+```
+## Adding and removing levels
+
+R does not allow us to add a new level to a factor without some work. See what happens when we concatenate a string with a factor:
+
+```{r}
+new.vector <- c("new label", diamonds$cut)
+class(new.vector)
+```
+R has coerced the factor to a character vector, because it refuses to add a new level to `diamonds$cut`. 
+
+Similarly, let's try to replace the first element of `diamonds$cut` with something new:
+
+```{r}
+diamonds_modified <- diamonds
+diamonds_modified$cut[1] <- "new label"
+head(diamonds_modified$cut)
+```
+
+Instead of changing the first element to `new label`, it is `NA`, because there is no "new label" level to `diamonds_modified$cut`. 
+
+## Loading data
+
+One issue with factors is that `read.csv()` and the other base R functions for reading text files sometimes convert string (text) columns to factors. This behavior is set by the `stringsAsFactors` argument, which defaulted to `TRUE` prior to R 4.0. (Since R 4.0 it defaults to the value of the global `stringsAsFactors` value, which by default is `FALSE`).
+
+I encourage you to always use the **tidyverse** functions for reading data, such as `read_csv()`, rather than the base R alternatives (`read.csv()`). These default to reading string columns as characters.
+
+### Potential disasters with hand-entered data
+
+One reason this can cause problems: imagine that you have a data set full of numbers which has been entered by hand. If the data set is of any size, it is very likely that someone made a mistake entering the numbers: perhaps there is a stray letter, or, worse, an accidental space character after one of the numbers. 
+
+Since that data set contains a character value, the entire column must be coerced to either a factor or a character vector. Imagine you have a dataset that looks like this:
+
+label.column | numeric.column 
+--- | ---
+sample 1 | 5 
+sample 2 | 17 
+sample 3 | 23,
+
+The comma after `23` causes the column to be interpreted as text.
+
+```{r}
+num.fac <- factor(c(5, 17, "23,"))
+```
+
+We could convert this to a numeric vector as `as.numeric()`, but like we saw above, this doesn't give us results that we want:
+
+```{r}
+as.numeric(num.fac)
+```
+
+These are numbers, but they're not the numbers in our original dataset! 
+
+Instead, they have been given factor levels **based on their position in alphabetical order of characters**: `23,` starts with `2` so it comes after `17` and before `5` in alphabetical order.
+
+Instead, we want to convert the factor to a *character* vector first, *then* convert the character vector to a numeric vector:
+
+```{r}
+corrected.vec <- as.numeric(as.character(num.fac))
+corrected.vec
+```
+Now we have an `NA` instead of the 23, but at least the correctly-entered numbers stay intact.
+
+Finally, in order to figure out which rows are causing the problem, we can use the `which()` function:
+
+```{r}
+which(is.na(corrected.vec))
+```
+We can see from this that the problem was in the third row of the source data. We can go back to the source data file to see what's wrong with that entry.
+
+# Making factors work in your favor
+
+There is one situation where factors can be useful in the tidyverse: when you want character data to appear in non-alphabetical order, particularly in plots.
+
+Let's go back to the `diamonds` datase:
+
+```{r}
+levels(diamonds$cut)
+```
+
+Contrary to what I mentioned above, this is not in alphabetical order. However, it seems to be in a logical order of increasing quality: `Good` is better than `Fair`, `Very Good` is better than `Good`, and so on. This is probably the order in which we want to 
+
+That's because `cut` is an *ordered* factor. We can create ordered factors using the **forcats** package. I won't go into detail about this, but we might want to order a factor by a numerical value, for instance `carat`:
+
+```{r}
+diamonds_reordered <- diamonds %>%
+  mutate(reordered.cut = fct_reorder(.f = cut, .x = carat, .fun = median, .desc = TRUE))
+glimpse(diamonds_reordered)
+```
+Now `reordered.cut` is in order of decreasing median value of `carat`;
+
+```{r}
+ggplot(diamonds_reordered, aes(x=reordered.cut, y=carat)) + 
+  geom_boxplot() + 
+  scale_y_log10()
+```
+
