@@ -12,6 +12,19 @@
     
     
     <item>
+      <title>Subsetting vectors</title>
+      <link>/data_analysis_2020/notes/subsetting-vectors/</link>
+      <pubDate>Wed, 07 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/notes/subsetting-vectors/</guid>
+      <description>
+
+
+&lt;p&gt;Sometimes it is really helpful to use base R syntax to access parts of vectors and data frames.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Working with factors: Cut that toxicity out of your life</title>
       <link>/data_analysis_2020/notes/working-with-factors/</link>
       <pubDate>Wed, 07 Oct 2020 00:00:00 +0000</pubDate>
@@ -20,7 +33,7 @@
       <description>
 
 
-&lt;p&gt;Working with factors, which are dangerous and generally to be avoided.&lt;/p&gt;
+&lt;p&gt;Working with factors, which can be dangerous and generally to be avoided.&lt;/p&gt;
 </description>
     </item>
     

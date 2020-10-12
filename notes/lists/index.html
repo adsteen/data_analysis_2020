@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Lists - Reproducible Data Analysis</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Lists" />
+<meta property="og:description" content="
+
+
+Working R’s most flexible data type: lists.
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/data_analysis_2020/notes/lists/" />
+<meta property="article:published_time" content="2020-10-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-10-12T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Lists">
+<meta itemprop="description" content="
+
+
+Working R’s most flexible data type: lists.
+">
+<meta itemprop="datePublished" content="2020-10-12T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-10-12T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1185">
+
+
+
+<meta itemprop="keywords" content="week08," />
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Lists"/>
+<meta name="twitter:description" content="
+
+
+Working R’s most flexible data type: lists.
+"/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/data_analysis_2020/css/style.css">
+	<link rel="stylesheet" href="/data_analysis_2020/css/custom.css">
+
+	<link rel="shortcut icon" href="/data_analysis_2020/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/data_analysis_2020/" title="Reproducible Data Analysis" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/data_analysis_2020/img/svalbard_sky.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Reproducible Data Analysis</div>
+					<div class="logo__tagline">Public site for UT-Knoxville MICR 493/593; GEOL 490/590</div>
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Lists</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-10-12T00:00:00Z">2020-10-12</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/data_analysis_2020/categories/base-r/" rel="category">base R</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<p>We have done a lot with vectors, and with data frames (including their tidyverse manifestation, tibbles). Now we’re going to talk about the most flexible data type, lists.</p>
+<p>(Side note: As <a href="https://r4ds.had.co.nz/vectors.html#vector-basics">Groremund and Wickham point out</a>, basically everything in R is a list, including atomic vectors. This is mostly a pedantic point, and for the most part it makes sense to think of a list as a separate thing from vectors).</p>
+<p>If vectors are like a 1-dimensional column of numbers, and data frames are like 2-dimensional data tables, I think of lists as being like a big bag: you can put whatever you want into them, and the shape is not important. However, lists are ordered - just like vectors (which, again, are a specific type of list!) - so there is a first element, a second element, etc.</p>
+<p>Lists are great when you need to store poorly-structured data. One example you will probably run into a lot is the linear model object, which is a specific type of list. We can create a linear model (a.k.a. a linear regression) using the <code>lm()</code> function. For instance, say we want to make a linear model of care mileage, in miles per gallon, versus weight:</p>
+<pre class="r"><code>my_mod &lt;- lm(mpg ~ wt, data = mtcars)
+str(my_mod)</code></pre>
+<pre><code>## List of 12
+##  $ coefficients : Named num [1:2] 37.29 -5.34
+##   ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;(Intercept)&quot; &quot;wt&quot;
+##  $ residuals    : Named num [1:32] -2.28 -0.92 -2.09 1.3 -0.2 ...
+##   ..- attr(*, &quot;names&quot;)= chr [1:32] &quot;Mazda RX4&quot; &quot;Mazda RX4 Wag&quot; &quot;Datsun 710&quot; &quot;Hornet 4 Drive&quot; ...
+##  $ effects      : Named num [1:32] -113.65 -29.116 -1.661 1.631 0.111 ...
+##   ..- attr(*, &quot;names&quot;)= chr [1:32] &quot;(Intercept)&quot; &quot;wt&quot; &quot;&quot; &quot;&quot; ...
+##  $ rank         : int 2
+##  $ fitted.values: Named num [1:32] 23.3 21.9 24.9 20.1 18.9 ...
+##   ..- attr(*, &quot;names&quot;)= chr [1:32] &quot;Mazda RX4&quot; &quot;Mazda RX4 Wag&quot; &quot;Datsun 710&quot; &quot;Hornet 4 Drive&quot; ...
+##  $ assign       : int [1:2] 0 1
+##  $ qr           :List of 5
+##   ..$ qr   : num [1:32, 1:2] -5.657 0.177 0.177 0.177 0.177 ...
+##   .. ..- attr(*, &quot;dimnames&quot;)=List of 2
+##   .. .. ..$ : chr [1:32] &quot;Mazda RX4&quot; &quot;Mazda RX4 Wag&quot; &quot;Datsun 710&quot; &quot;Hornet 4 Drive&quot; ...
+##   .. .. ..$ : chr [1:2] &quot;(Intercept)&quot; &quot;wt&quot;
+##   .. ..- attr(*, &quot;assign&quot;)= int [1:2] 0 1
+##   ..$ qraux: num [1:2] 1.18 1.05
+##   ..$ pivot: int [1:2] 1 2
+##   ..$ tol  : num 1e-07
+##   ..$ rank : int 2
+##   ..- attr(*, &quot;class&quot;)= chr &quot;qr&quot;
+##  $ df.residual  : int 30
+##  $ xlevels      : Named list()
+##  $ call         : language lm(formula = mpg ~ wt, data = mtcars)
+##  $ terms        :Classes &#39;terms&#39;, &#39;formula&#39;  language mpg ~ wt
+##   .. ..- attr(*, &quot;variables&quot;)= language list(mpg, wt)
+##   .. ..- attr(*, &quot;factors&quot;)= int [1:2, 1] 0 1
+##   .. .. ..- attr(*, &quot;dimnames&quot;)=List of 2
+##   .. .. .. ..$ : chr [1:2] &quot;mpg&quot; &quot;wt&quot;
+##   .. .. .. ..$ : chr &quot;wt&quot;
+##   .. ..- attr(*, &quot;term.labels&quot;)= chr &quot;wt&quot;
+##   .. ..- attr(*, &quot;order&quot;)= int 1
+##   .. ..- attr(*, &quot;intercept&quot;)= int 1
+##   .. ..- attr(*, &quot;response&quot;)= int 1
+##   .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: R_GlobalEnv&gt; 
+##   .. ..- attr(*, &quot;predvars&quot;)= language list(mpg, wt)
+##   .. ..- attr(*, &quot;dataClasses&quot;)= Named chr [1:2] &quot;numeric&quot; &quot;numeric&quot;
+##   .. .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;mpg&quot; &quot;wt&quot;
+##  $ model        :&#39;data.frame&#39;:   32 obs. of  2 variables:
+##   ..$ mpg: num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+##   ..$ wt : num [1:32] 2.62 2.88 2.32 3.21 3.44 ...
+##   ..- attr(*, &quot;terms&quot;)=Classes &#39;terms&#39;, &#39;formula&#39;  language mpg ~ wt
+##   .. .. ..- attr(*, &quot;variables&quot;)= language list(mpg, wt)
+##   .. .. ..- attr(*, &quot;factors&quot;)= int [1:2, 1] 0 1
+##   .. .. .. ..- attr(*, &quot;dimnames&quot;)=List of 2
+##   .. .. .. .. ..$ : chr [1:2] &quot;mpg&quot; &quot;wt&quot;
+##   .. .. .. .. ..$ : chr &quot;wt&quot;
+##   .. .. ..- attr(*, &quot;term.labels&quot;)= chr &quot;wt&quot;
+##   .. .. ..- attr(*, &quot;order&quot;)= int 1
+##   .. .. ..- attr(*, &quot;intercept&quot;)= int 1
+##   .. .. ..- attr(*, &quot;response&quot;)= int 1
+##   .. .. ..- attr(*, &quot;.Environment&quot;)=&lt;environment: R_GlobalEnv&gt; 
+##   .. .. ..- attr(*, &quot;predvars&quot;)= language list(mpg, wt)
+##   .. .. ..- attr(*, &quot;dataClasses&quot;)= Named chr [1:2] &quot;numeric&quot; &quot;numeric&quot;
+##   .. .. .. ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;mpg&quot; &quot;wt&quot;
+##  - attr(*, &quot;class&quot;)= chr &quot;lm&quot;</code></pre>
+<p>Good golly, that’s a lot of information in there. A statistician would say that a linear model is fully specified by just a slope and an intercept. But this contains all kinds of other information!</p>
+<div id="accessing-list-elements" class="section level1">
+<h1>Accessing list elements</h1>
+<p>There are three ways to access elements of a list:</p>
+<ul>
+<li>using <code>[</code></li>
+<li>using <code>[[</code></li>
+<li>using <code>$</code></li>
+</ul>
+<div id="acessing-list-elements-with" class="section level2">
+<h2>Acessing list elements with <code>[</code></h2>
+<p>Vectors are a type of list, so we can subset them like we subset lists:</p>
+<pre class="r"><code>my_mod[1]</code></pre>
+<pre><code>## $coefficients
+## (Intercept)          wt 
+##   37.285126   -5.344472</code></pre>
+<p>This looks useful - it has the word “coefficients” in there - but let’s use <code>str()</code> to learn more.</p>
+<pre class="r"><code>str(my_mod[1])</code></pre>
+<pre><code>## List of 1
+##  $ coefficients: Named num [1:2] 37.29 -5.34
+##   ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;(Intercept)&quot; &quot;wt&quot;</code></pre>
+<p>That’s a little odd: it is a list of length one. It turns out that <code>[</code> subsetting lists <em>always returns another list</em> which contains the list element. This is usually not what we want. Instead…</p>
+</div>
+<div id="subsetting-lists-with" class="section level2">
+<h2>Subsetting lists with <code>[[</code></h2>
+<p>…we can subset lists using <code>[[</code>, to get the actual contents of the respective list element. For instance,</p>
+<pre class="r"><code>my_mod[[1]]</code></pre>
+<pre><code>## (Intercept)          wt 
+##   37.285126   -5.344472</code></pre>
+<p><code>my_mod[[1]]</code> returns a 2-element, named vector (which contains the slope and intercept of the linear model), while <code>my_mod[1]</code> returns <em>a list which contains</em> that same 2-element, named vector.</p>
+<p><strong>When you are accessing list elements, you will almost always want to use <code>[[</code> rather than <code>[</code> to access specific elements.</strong></p>
+</div>
+<div id="accessing-list-elements-by-name" class="section level2">
+<h2>Accessing list elements by name</h2>
+<p>List elements are always numbered. They <em>can</em> also be named, although this is not required. For instance, the first element of an <code>lm</code> object is always named <code>coefficients</code>:</p>
+<pre class="r"><code>my_mod[[&quot;coefficients&quot;]]</code></pre>
+<pre><code>## (Intercept)          wt 
+##   37.285126   -5.344472</code></pre>
+<p><code>my_mod[["coefficients"]]</code> is exactly equivalent to <code>my_mod[[1]]</code>.</p>
+<p>We can see a bit more about this by creating our own lists using the <code>list()</code> function:</p>
+<pre class="r"><code>my_list &lt;- list(a_data_frame = mtcars, a.vector = letters, my_mod)</code></pre>
+<p>Here I’ve created a list of length 3 (try <code>length(my_list)</code>), where I named the first two elements <code>a_data_frame</code> and <code>a.vector</code> (check the style guide to remember why I used <code>_</code> in the data frame name and <code>.</code> in the vector name). But I didn’t name the third element. So I can access the first two elements by name (<code>my_list[["a.vector"]]</code>) but I have to access the third element by index (<code>my_list[[3]]</code>).</p>
+</div>
+</div>
+<div id="acessing-list-elements-with-1" class="section level1">
+<h1>Acessing list elements with <code>$</code></h1>
+<p>Finally, we can use <code>$</code> to access list elements by name:</p>
+<pre class="r"><code>my_mod$coefficients</code></pre>
+<pre><code>## (Intercept)          wt 
+##   37.285126   -5.344472</code></pre>
+<p>Note that when I used <code>[[</code> to access list elements by name, I had to surround the list elements with quotation markes, but when I use <code>$</code> syntax, I don’t use quotation marks. At this point it is not worth thinking too hard about why that is.</p>
+</div>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/data_analysis_2020/tags/week08/" rel="tag">week08</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/data_analysis_2020/notes/subsetting-vectors/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Subsetting vectors</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Andrew D. Steen.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/data_analysis_2020/js/menu.js"></script>
+<script src="/data_analysis_2020/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

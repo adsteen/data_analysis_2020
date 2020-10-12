@@ -1,0 +1,91 @@
+---
+title: 'Lists'
+author: ~
+date: '2020-10-12'
+slug: lists
+categories: [base R]
+tags: [week08]
+draft: yes
+---
+
+Working R's most flexible data type: lists.
+
+<!--more-->
+
+We have done a lot with vectors, and with data frames (including their tidyverse manifestation, tibbles). Now we're going to talk about the most flexible data type, lists.
+
+(Side note: As [Groremund and Wickham point out](https://r4ds.had.co.nz/vectors.html#vector-basics), basically everything in R is a list, including atomic vectors. This is mostly a pedantic point, and for the most part it makes sense to think of a list as a separate thing from vectors). 
+
+If vectors are like a 1-dimensional column of numbers, and data frames are like 2-dimensional data tables, I think of lists as being like a big bag: you can put whatever you want into them, and the shape is not important. However, lists are ordered - just like vectors (which, again, are a specific type of list!) - so there is a first element, a second element, etc.
+
+Lists are great when you need to store poorly-structured data. One example you will probably run into a lot is the linear model object, which is a specific type of list. We can create a linear model (a.k.a. a linear regression) using the `lm()` function. For instance, say we want to make a linear model of care mileage, in miles per gallon, versus weight:
+
+```{r}
+my_mod <- lm(mpg ~ wt, data = mtcars)
+str(my_mod)
+```
+Good golly, that's a lot of information in there. A statistician would say that a linear model is fully specified by just a slope and an intercept. But this contains all kinds of other information!
+
+# Accessing list elements
+
+There are three ways to access elements of a list:
+
+* using `[`
+* using `[[`
+* using `$`
+
+## Acessing list elements with `[`
+
+Vectors are a type of list, so we can subset them like we subset lists:
+
+```{r}
+my_mod[1]
+```
+
+This looks useful - it has the word "coefficients" in there - but let's use `str()` to learn more.
+
+```{r}
+str(my_mod[1])
+```
+
+That's a little odd: it is a list of length one. It turns out that `[` subsetting lists *always returns another list* which contains the list element. This is usually not what we want. Instead...
+
+## Subsetting lists with `[[`
+
+...we can subset lists using `[[`, to get the actual contents of the respective list element. For instance,
+
+```{r}
+my_mod[[1]]
+```
+
+`my_mod[[1]]` returns a 2-element, named vector (which contains the slope and intercept of the linear model), while `my_mod[1]` returns *a list which contains* that same 2-element, named vector. 
+
+**When you are accessing list elements, you will almost always want to use `[[` rather than `[` to access specific elements.**
+
+## Accessing list elements by name
+
+List elements are always numbered. They *can* also be named, although this is not required. For instance, the first element of an `lm` object is always named `coefficients`:
+
+```{r}
+my_mod[["coefficients"]]
+```
+
+`my_mod[["coefficients"]]` is exactly equivalent to `my_mod[[1]]`. 
+
+We can see a bit more about this by creating our own lists using the `list()` function:
+
+```{r}
+my_list <- list(a_data_frame = mtcars, a.vector = letters, my_mod)
+```
+
+Here I've created a list of length 3 (try `length(my_list)`), where I named the first two elements `a_data_frame` and `a.vector` (check the style guide to remember why I used `_` in the data frame name and `.` in the vector name). But I didn't name the third element. So I can access the first two elements by name (`my_list[["a.vector"]]`) but I have to access the third element by index (`my_list[[3]]`). 
+
+# Acessing list elements with `$`
+
+Finally, we can use `$` to access list elements by name:
+
+```{r}
+my_mod$coefficients
+```
+
+Note that when I used `[[` to access list elements by name, I had to surround the list elements with quotation markes, but when I use `$` syntax, I don't use quotation marks. At this point it is not worth thinking too hard about why that is.

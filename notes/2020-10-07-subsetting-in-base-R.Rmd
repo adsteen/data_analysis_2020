@@ -1,0 +1,91 @@
+---
+title: 'Subsetting vectors'
+author: ~
+date: '2020-10-07'
+slug: subsetting-vectors
+categories: [base R]
+tags: [week08]
+draft: no
+---
+
+Sometimes it is really helpful to use base R syntax to access parts of vectors and data frames.
+
+<!--more-->
+
+Our approach in this course centers on the tidyverse. Using this approach, we can access specific rows of a data frame using `filter()`, and columns of a data frame using `select()`. 
+
+Base R gives us three different tools to access specific elements of vectors, parts of data frames, and elements of lists. Here we'll focus on vectors and data frames. We call accessing specific elements of an object *subsetting*. 
+
+# `[` for vector elements
+
+We can use the `[` operator to access elements of vectors by their index. Let's look at a vector of US state names, which are provided as rownames of a built-in data set called `USArrests`:
+
+```{r}
+states <- rownames(USArrests)
+head(states)
+```
+
+
+## Two ways of using `[`
+
+There are two basic ways to use `[` to subset a vector:
+
+* Access elements by index
+* Access elements using a logical vector
+
+### Accessing elements by index
+
+Every element in a vector has an *index* - this is just the number at which the element appears in the vector. The index of the first element is 1, the second element is 2, etc. For instance, we can see the 42nd element in the `states` vector using:
+
+```{r}
+states[42]
+```
+
+The `:` operator creates a sequence of integers, so we can get, for instance, the first 5 elements of a vector like so:
+
+```{r}
+states[1:5]
+```
+
+The `seq()` function creates more complicated sequences. Here is every 7th element of `states`:
+
+```{r}
+states[seq(from = 1, to = 50, by = 7)]
+```
+
+### Subsetting with a logical vector
+
+More often, however, we want to create some test, to return elements of a vector that meet a condition. For instance, which elements of `states` are equal to `Alabama`? 
+
+```{r}
+states == "Alabama"
+```
+
+We've seen the `==` synax when we were learning to use `filter()` - remember that it returns a logical vector, with values of either `TRUE` or `FALSE`. 
+
+As an aside, because `TRUE` and `FALSE` are stored as `1` and `0`, we can calculate how many times `Alabama` appears in `states` - hopefully only once, but you can never be too sure!
+
+```{r}
+sum(states == "Alabama")
+```
+
+Thank heavens.
+
+
+If we subset using a vector of logicals like that, R will return only those elements that correspond to `TRUE`. For instance
+
+```{r}
+states[states == "Alabama"]
+```
+
+**Please** think carefully about what is happening here:
+
+1. `states == "Alabama"` creates a 50-element logical vector, with `TRUE` for every element of `states` that equals `"Alabama"`, and `FALSE` otherwise. 
+2. We susbet `states` using that logical vector. Since only the first element is `TRUE`, R returns only the first element.
+
+**A warning:** in the example above, we subsetted the 50-element vector `states` with a 50-element logical vector. However, remember about vector recycling: R will recycle the logical vector as necessary to reach the length of the vector you're subsetting. For instance, to get every other state name, we could use:
+
+```{r}
+states[c(TRUE, FALSE)]
+```
+

@@ -8,7 +8,7 @@ tags: [week08]
 draft: no
 ---
 
-Working with factors, which are dangerous and generally to be avoided.
+Working with factors, which can be dangerous and generally to be avoided.
 
 <!--more-->
 
