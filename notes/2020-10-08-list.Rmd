@@ -80,6 +80,18 @@ my_list <- list(a_data_frame = mtcars, a.vector = letters, my_mod)
 
 Here I've created a list of length 3 (try `length(my_list)`), where I named the first two elements `a_data_frame` and `a.vector` (check the style guide to remember why I used `_` in the data frame name and `.` in the vector name). But I didn't name the third element. So I can access the first two elements by name (`my_list[["a.vector"]]`) but I have to access the third element by index (`my_list[[3]]`). 
 
+## Nested lists
+
+Remember that lists can contain anything, including other lists. That means that list elements may be nested. This is what we saw in the `lm` object list - `str` showed us each element in each element of the list. An `lm` object goes 2 levels deep, but lists can in principle go as deep as you like.
+
+You can access these deeper levels of lists by stacking subsetting notation:
+
+```{r}
+# This returns the actual data in the `mpg` vector from which the model was created.
+my_mod[["model"]][["mpg"]]
+```
+
+
 # Acessing list elements with `$`
 
 Finally, we can use `$` to access list elements by name:
@@ -88,4 +100,18 @@ Finally, we can use `$` to access list elements by name:
 my_mod$coefficients
 ```
 
-Note that when I used `[[` to access list elements by name, I had to surround the list elements with quotation markes, but when I use `$` syntax, I don't use quotation marks. At this point it is not worth thinking too hard about why that is.
+Note that when I used `[[` to access list elements by name, I had to surround the list elements with quotation marks, but when I use `$` syntax, I don't use quotation marks. At this point it is not worth thinking too hard about why that is, but you should keep it in mind.
+
+## Accessing data frame columns with `$`
+
+We come back to the point that data frames are a special kind of list, where each column-vector in the data frame is an element of the list. 
+
+Since we can access list elements by name using `$`, we can access columns of data frames the same way. You will find that this is the most common way to access columns of data frames. For instance,
+
+```{r}
+str(mtcars$mpg)
+```
+
+shows that `mtcars$mpg` returns a vector corresponding to the `mpg` column of `mtcars`. 
+
+We have also subsetted columns of data frames using the tidyverse function `select()`. There is an important difference though: `select()` always returns a **data frame**, whereas `$` and `[[` return **vectors**. 

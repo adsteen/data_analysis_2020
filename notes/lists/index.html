@@ -26,7 +26,7 @@ Working R’s most flexible data type: lists.
 ">
 <meta itemprop="datePublished" content="2020-10-12T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2020-10-12T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1185">
+<meta itemprop="wordCount" content="1449">
 
 
 
@@ -195,6 +195,16 @@ str(my_mod)</code></pre>
 <pre class="r"><code>my_list &lt;- list(a_data_frame = mtcars, a.vector = letters, my_mod)</code></pre>
 <p>Here I’ve created a list of length 3 (try <code>length(my_list)</code>), where I named the first two elements <code>a_data_frame</code> and <code>a.vector</code> (check the style guide to remember why I used <code>_</code> in the data frame name and <code>.</code> in the vector name). But I didn’t name the third element. So I can access the first two elements by name (<code>my_list[["a.vector"]]</code>) but I have to access the third element by index (<code>my_list[[3]]</code>).</p>
 </div>
+<div id="nested-lists" class="section level2">
+<h2>Nested lists</h2>
+<p>Remember that lists can contain anything, including other lists. That means that list elements may be nested. This is what we saw in the <code>lm</code> object list - <code>str</code> showed us each element in each element of the list. An <code>lm</code> object goes 2 levels deep, but lists can in principle go as deep as you like.</p>
+<p>You can access these deeper levels of lists by stacking subsetting notation:</p>
+<pre class="r"><code># This returns the actual data in the `mpg` vector from which the model was created.
+my_mod[[&quot;model&quot;]][[&quot;mpg&quot;]]</code></pre>
+<pre><code>##  [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4
+## [16] 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7
+## [31] 15.0 21.4</code></pre>
+</div>
 </div>
 <div id="acessing-list-elements-with-1" class="section level1">
 <h1>Acessing list elements with <code>$</code></h1>
@@ -202,7 +212,16 @@ str(my_mod)</code></pre>
 <pre class="r"><code>my_mod$coefficients</code></pre>
 <pre><code>## (Intercept)          wt 
 ##   37.285126   -5.344472</code></pre>
-<p>Note that when I used <code>[[</code> to access list elements by name, I had to surround the list elements with quotation markes, but when I use <code>$</code> syntax, I don’t use quotation marks. At this point it is not worth thinking too hard about why that is.</p>
+<p>Note that when I used <code>[[</code> to access list elements by name, I had to surround the list elements with quotation marks, but when I use <code>$</code> syntax, I don’t use quotation marks. At this point it is not worth thinking too hard about why that is, but you should keep it in mind.</p>
+<div id="accessing-data-frame-columns-with" class="section level2">
+<h2>Accessing data frame columns with <code>$</code></h2>
+<p>We come back to the point that data frames are a special kind of list, where each column-vector in the data frame is an element of the list.</p>
+<p>Since we can access list elements by name using <code>$</code>, we can access columns of data frames the same way. You will find that this is the most common way to access columns of data frames. For instance,</p>
+<pre class="r"><code>str(mtcars$mpg)</code></pre>
+<pre><code>##  num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...</code></pre>
+<p>shows that <code>mtcars$mpg</code> returns a vector corresponding to the <code>mpg</code> column of <code>mtcars</code>.</p>
+<p>We have also subsetted columns of data frames using the tidyverse function <code>select()</code>. There is an important difference though: <code>select()</code> always returns a <strong>data frame</strong>, whereas <code>$</code> and <code>[[</code> return <strong>vectors</strong>.</p>
+</div>
 </div>
 
 		</div>
