@@ -5,7 +5,7 @@ date: '2020-10-12'
 slug: lists
 categories: [base R]
 tags: [week08]
-draft: yes
+draft: no
 ---
 
 Working R's most flexible data type: lists.

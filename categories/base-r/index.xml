@@ -6,10 +6,23 @@
     <description>Recent content in base R on Reproducible Data Analysis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/data_analysis_2020/categories/base-r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lists</title>
+      <link>/data_analysis_2020/notes/lists/</link>
+      <pubDate>Mon, 12 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/notes/lists/</guid>
+      <description>
+
+
+&lt;p&gt;Working R’s most flexible data type: lists.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Subsetting vectors</title>
