@@ -3,12 +3,57 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/data_analysis_2020/categories/base-r/</loc>
-    <lastmod>2020-10-12T00:00:00+00:00</lastmod>
+    <loc>/data_analysis_2020/categories/</loc>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/data_analysis_2020/categories/</loc>
+    <loc>/data_analysis_2020/final_project/final-project-overview/</loc>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/data_analysis_2020/categories/final-project/</loc>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/data_analysis_2020/final_project/</loc>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/data_analysis_2020/categories/homework/</loc>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/data_analysis_2020/homework/homework-9/</loc>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/data_analysis_2020/homework/</loc>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/data_analysis_2020/</loc>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/data_analysis_2020/tags/</loc>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/data_analysis_2020/tags/week09/</loc>
+    <lastmod>2020-10-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/data_analysis_2020/categories/base-r/</loc>
     <lastmod>2020-10-12T00:00:00+00:00</lastmod>
   </url>
   
@@ -23,16 +68,6 @@
   </url>
   
   <url>
-    <loc>/data_analysis_2020/</loc>
-    <lastmod>2020-10-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/data_analysis_2020/tags/</loc>
-    <lastmod>2020-10-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/data_analysis_2020/tags/week08/</loc>
     <lastmod>2020-10-12T00:00:00+00:00</lastmod>
   </url>
@@ -43,17 +78,7 @@
   </url>
   
   <url>
-    <loc>/data_analysis_2020/categories/homework/</loc>
-    <lastmod>2020-10-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/data_analysis_2020/homework/homework-8/</loc>
-    <lastmod>2020-10-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/data_analysis_2020/homework/</loc>
     <lastmod>2020-10-07T00:00:00+00:00</lastmod>
   </url>
   

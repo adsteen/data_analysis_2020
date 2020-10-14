@@ -6,10 +6,19 @@
     <description>Recent content in homework on Reproducible Data Analysis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 14 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/data_analysis_2020/categories/homework/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Homework 9 options</title>
+      <link>/data_analysis_2020/homework/homework-9/</link>
+      <pubDate>Wed, 14 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/homework/homework-9/</guid>
+      <description>&lt;p&gt;Homework 9 is due Wednesday, October 21.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Homework 8: More Data Wrangling</title>
