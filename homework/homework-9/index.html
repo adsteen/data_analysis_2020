@@ -18,7 +18,7 @@
 <meta itemprop="description" content="Homework 9 is due Wednesday, October 21.">
 <meta itemprop="datePublished" content="2020-10-14T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2020-10-14T00:00:00+00:00" />
-<meta itemprop="wordCount" content="308">
+<meta itemprop="wordCount" content="311">
 
 
 
@@ -78,25 +78,36 @@
 </div>
 <div class="content post__content clearfix">
 			<p>Homework 9 is due Wednesday, October 21.</p>
-<h1 id="final-project-prospectus">Final project prospectus</h1>
+<h1 id="part-1-final-project-prospectus">Part 1: Final project prospectus</h1>
 <p>Write a paragraph or two about what you might do for a final project. Name group members and poitn to the data source(s) you will use. Mention any challenges you expect to encounter.</p>
-<h1 id="option-2-functions-and-programming">Option 2: Functions and programming</h1>
+<h1 id="part-2-functions-and-programming">Part 2: Functions and programming</h1>
 <ol>
-<li>Following <em>R for Data Science</em> exercise 19.2.1.4, write a function to calculate the variance of a numeric vector.  Be sure that the function auto-prints the result if the result is not assigned to a variable.</li>
-<li>Write <code>both_na()</code>, a function that takes two vectors of the same length and returns the number of positions that have an NA in both vectors.</li>
-<li>Write a function to create a specific kind of plot, with useful labels, etc., that can take a data frame as an argument. This is useful when you want to make multiple, similar plots from different data.</li>
-<li>Write a function that takes one argument and does the following:
+<li>
+<p>Following <em>R for Data Science</em> exercise 19.2.1.4, write a function to calculate the variance of a numeric vector.  Be sure that the function auto-prints the result if the result is not assigned to a variable.</p>
+</li>
+<li>
+<p>Write <code>both_na()</code>, a function that takes two vectors of the same length and returns the number of positions that have an NA in both vectors.</p>
+</li>
+<li>
+<p>Write a function to create a specific kind of plot, with useful labels, etc., that can take a data frame as an argument. This is useful when you want to make multiple, similar plots from different data.</p>
+</li>
+<li>
+<p>Write a function that takes one argument and does the following:</p>
 <ul>
 <li>if the argument is a numeric vector, multiplies every number in the vector by 2</li>
 <li>if the argument is a character vector, sorts the vector into alphabetical order</li>
 <li>if the argument is anything else, issues an informative warning and returns the argument unchanged</li>
 </ul>
 </li>
-<li>Write a function that tries to calculate the mean of a vector using <code>mean()</code>. If that is successful, it returns the mean of the vector. If <code>mean()</code> throws an error, it issues an informative message and returns the input intact.</li>
-<li>Use <code>system.time()</code> (or, if you want to be more advanced about it, the <strong>bench</strong> or <strong>microbenchmark</strong> packages) to compare how long it takes to add two, 1-million-element random vectors and store the result in a third vector:
-a. Using the vectorized <code>sum()</code> operation
-b. Using a for loop with a pre-allocated vector to store the results
-c. Using a for loop without pre-allocating a vector to store the results</li>
+<li>
+<p>Write a function that tries to calculate the mean of a vector using <code>mean()</code>. If that is successful, it returns the mean of the vector. If <code>mean()</code> throws an error, it issues an informative message and returns the input intact.</p>
+</li>
+<li>
+<p>Use <code>system.time()</code> (or, if you want to be more advanced about it, the <strong>bench</strong> or <strong>microbenchmark</strong> packages) to compare how long it takes to add two, 1-million-element random vectors and store the result in a third vector:</p>
+<pre><code> a. Using any vectorized operation (e.g., `+`)
+ b. Using a for loop with a pre-allocated vector to store the results
+ c. Using a for loop without pre-allocating a vector to store the results</code></pre>
+</li>
 </ol>
 		</div>
 		<footer class="post__footer">
