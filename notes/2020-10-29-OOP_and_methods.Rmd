@@ -1,0 +1,152 @@
+---
+title: 'Object-oriented programming and methods'
+author: ~
+date: '2020-10-29'
+slug: OOP-and-methods
+categories: [dplyr]
+tags: [week08]
+draft: no
+---
+
+Learning about object-oriented programming with R's S3 object-oriented programming system.
+
+<!--more-->
+
+# Understanding OOP
+
+Writing functions allows you to transform data in new and interesting ways. In many cases, you might want to create a new kind of data structure to hold those transformed structures.
+
+Object classes allow you to do that. You have already run into classes: data frames, atomic vectors, and `lm` objects are all examples of different classes of objects. 
+
+In R, all objects belong to a class. We can determine the class using the `class()` function. For instance:
+
+```{r}
+m <- lm(mpg ~ wt, data = mtcars)
+class(m)
+```
+
+Classes are an aspect of the **object-oriented programming** (OOP) paradigm. OOP code is based around *objects* (think of nouns) and *methods* (think of verbs). 
+
+# R's insane OOP systems
+
+Because we all did something wrong in a past life, R has not one but at least four sets of OOP systems: **S3**, **S4**, and **R6**, and **Reference Classes**. These all work differently. We're going to talk about the **S3** system, which is ([arguably](https://adv-r.hadley.nz/oo.html)) the most important. It is certainly the easiest to understand, and probably the one you will run into most often.
+
+## Nested classes and inheritance: The biological model
+
+In S3, as well as virtually every OOP system, classes can contain subclasses. For an example, let's look at **tibbles**, which are the tidyverse's version of data frame.
+
+```{r, message=FALSE}
+library(tidyverse)
+mt_tibble <- as_tibble(mtcars)
+class(mt_tibble)
+```
+When we turn the `mt_cars` data frame into a tibble, we see that it now belongs to 3 classes: `tbl_df`, `tbl`, and `data.frame`. These are "nested" within each other: `tbl_df` is a subclass of `tbl`, and `tbl` is a subclass of `data.frame`. 
+
+I think of these subclasses as working a bit like biological taxa. For instance, a wolf is a member of the "subclass" (genus) *Canis* (dogs, wolves, etc.), which is a "subclass" of the order *Carnivora* (cats, dogs, seals, and a bunch of other mostly-carnivorous mammals), which is a subclass of mammals. 
+
+Biological taxa inherit the characteristics of their parent taxa. For instance, members of the "mammal" class have fur or hair, are warm-blooded, and feed their young with milk. (Let's not worry too much about the weird exceptions like platypuses, because biology has a way of screwing up any classification system we impose on it). The *Carnivora* have all of the traits of the mammals, plus a [few more](https://en.wikipedia.org/wiki/Carnivora#Anatomy_and_physiology): large, conical front teeth and (ususally) a carnivorous diet. Wolves have all of those traits, plus the various features that allow us to distinguish a wolf from, say, a fox.
+
+OOP classes behave the same way: a subclass has all of the features of its parent class, plus potentially some more distinguishing features. A "tibble" (`tbl_df`) has all of the features of a data frame (it has columns which are atomic vectors, each vector is the same length), plus some others (it can't have row names). See the `tibble` vignette (`vignette("tibble")`)  or [R for Data Science](https://r4ds.had.co.nz/tibbles.html) for more about tibbles, but the point is this: subclasses *inherit* their features from their parent classes. 
+
+# Methods: Capabilities of classes
+
+What is the point of an object belonging to a class? In R, the main point has to do with **generics** (short for *generic functions*) and **methods**. 
+
+A generic is a function that behaves differently depending on what class of object is passed to it. The fancy computer science name for this behavior is *polymorphism*. Consider `summary()`: it does a totally different thing when you call it on a factor vs on a numeric vector. For instance, compare
+
+```{r}
+summary(diamonds$color)
+```
+vs 
+```{r}
+summary(diamonds$carat)
+```
+
+The reason is that `summary()` is a generic function. When we call `summary()`, R internally figures out the class of the object that was passed to it, and then *dispatches* the appropriate function for that class. We call those functions, which are implementations of generic functions for a specific class, **methods**. 
+
+In R, methods have a very straightforward naming convention: they are named as the generic name, followed by a `.`, followed by the name of the class. So for instance the method for creating a summary of a factor is `summary.factor()`. The method for creating a summary of an `lm` object is `summary.lm()`. We can get help on them accordingly: try `?summary.lm`.
+
+### Watching method dispatch
+
+When we pass an object to a generic function, R has to figure out which method to use. It looks for a method for most specific class. If it finds one, it uses it. If not, it looks for the next most specific class, and so on. If it never finds a method, it uses the *default* method.
+
+The R package **sloop** is designed to help us understand R objects and their methods. (The name is meant to evoke "sailing the seas of OOP", which is a rather lovely image). It allows us to see the process of method dispatch for a function call:
+
+```{r}
+sloop::s3_dispatch(print(diamonds))
+```
+
+Here, `=>` indicates a method exists and is used. `*` indicates that a method exists but is not used, and the result appears gray if the method does not exist. For instance, `tbl_df` is the most specific class that `diamonds` belongs to, so when we call `print(diamonds)`, R first checks for a method called `print.tbl_df()`, finds that it exists, and uses it. `sloop::s3_dispatch()` helpfully informs us that there are also `print()` methods for the `tbl` and `data.frame` classes, as well as a default `print()` method.
+
+We see slightly different behavior for a numeric vector:
+
+```{r}
+sloop::s3_dispatch(print(diamonds$price))
+```
+`diamonds$price` is a vector of integers, so when we try to `print()` it, R first checks for a specific `print.integer()` method, and finds that it does not exist. It nexts checks for `print.numeric()`, which also does not exist, and then finally settles on the default print method.
+
+Another very useful function in **sloop** is `s3_methods_class()`, which lists all of the methods associated with a particular class:
+
+```{r}
+sloop::s3_methods_class("ggplot")
+```
+`ggplot` objects have four methods associated with them `ggplot_build()`, `plot`, `print`, and `summary`. 
+
+# Creating classes and methods
+
+Often when we are writing code, particularly when we are writing packages, it will be useful to define our own classes, as well as methods to go along with those classes. For instance, imagine that we are writing a package to automate analysis from a specific instrument in our lab.  We might want to create a class to hold all the relevant output from that instrument, which might include multiple types of raw data, plus information about the experiment, etc.
+
+Changing the class of an object is really easy: we use the `class()` function:
+
+```{r}
+mtcars_new <- mtcars
+class(mtcars_new) <- "lm"
+```
+
+Voila! We have just changed the class of `mtcars` from `data.frame` to `lm`. Actually, we have just changed the value of `mtcars_new`'s class object to "lm". This is very much like just smacking a "Hello, my class is lm" nametag on our object, without doing anything else.
+
+Of course, this is fairly dangerous. If I point at my guinea pigs and say "I declare you to be horses!", they won't mind. However, if I try to put a saddle on them, bad things will happen. 
+
+Similarly, just because I just declared `mtcars_new` to be of the `lm` class, doesn't mean it will behave like a properly structured `lm` object. To wit:
+
+```{r}
+print(mtcars_new)
+```
+
+## Writing constructor functions
+
+To avoid this kind of problem, we want to create classes using a [**constructor** function](https://adv-r.hadley.nz/s3.html#s3-constructor). Constructor functions exist to create objects belonging to specific classes. They should always do three things:
+
+* have a name of the form `new_classname()`
+* have one argument for the base object, and one for each attribute that will be assigned to the base object (more on what this means later)
+* check that all of the arguments are of an appropriate type
+
+Imagine, for instance, we are creating a class for raw data produced by our lab instrument, which is called a [rebigulator](https://rebigulator.org/). We might call the class for this raw data `rebig_raw`. Thus, our constructor function would be called `new_rebig_raw()`. It might look like this:
+
+```{r}
+new_rebig_raw <- function(df, analyst) {
+  stopifnot(is.data.frame(df))
+  stopifnot(is.character(analyst))
+  
+  attr(df, "analyst") <- analyst
+  structure(df, class = c("rebig_raw", "data.frame"))
+}
+```
+
+Here, we have made `rebig_raw` a subclass of `data.frame`. Thus, all the methods that work on data frames will work on `rebig_raw` objects.
+
+## Writing methods
+
+However, we probably want to create some special methods. Since a `rebig_raw` object is just a data frame with an "author" attribute, we probably want the `summary` method to print the author name as well as the summary of the data. We can simply write a function called `summary.rebig_raw()`, like so:
+
+```{r}
+summary.rebig_raw <- function(rebig_obj) {
+  print(paste0("Analyst: ", attr(rebig_obj, "analyst"), sep = " "))
+  df_summ <- summary.data.frame(rebig_obj)
+  df_summ
+}
+my_rebig_obj <- new_rebig_raw(mtcars, analyst = "Drew")
+summary(my_rebig_obj)
+```
+There are many more intricacies to creating *good-quality* classes and associated methods, many of which can be found in advanced R, but this primer will get you started with the basics.
+
