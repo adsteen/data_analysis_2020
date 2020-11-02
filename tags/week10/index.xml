@@ -6,10 +6,21 @@
     <description>Recent content in week10 on Reproducible Data Analysis</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 21 Oct 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/data_analysis_2020/tags/week10/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Thu, 29 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="/data_analysis_2020/tags/week10/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Object-oriented programming and methods</title>
+      <link>/data_analysis_2020/notes/oop-and-methods/</link>
+      <pubDate>Thu, 29 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/data_analysis_2020/notes/oop-and-methods/</guid>
+      <description>
+&lt;link href=&#34;/data_analysis_2020/data_analysis_2020/rmarkdown-libs/anchor-sections/anchor-sections.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;/data_analysis_2020/data_analysis_2020/rmarkdown-libs/anchor-sections/anchor-sections.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;Learning about object-oriented programming with R’s S3 object-oriented programming system.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Homework 10</title>

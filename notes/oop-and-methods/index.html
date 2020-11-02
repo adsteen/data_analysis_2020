@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Object-oriented programming and methods - Reproducible Data Analysis</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Object-oriented programming and methods" />
+<meta property="og:description" content="
+
+
+
+
+Learning about object-oriented programming with R’s S3 object-oriented programming system.
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/data_analysis_2020/notes/oop-and-methods/" />
+<meta property="article:published_time" content="2020-10-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-10-29T00:00:00+00:00" />
+
+		<meta itemprop="name" content="Object-oriented programming and methods">
+<meta itemprop="description" content="
+
+
+
+
+Learning about object-oriented programming with R’s S3 object-oriented programming system.
+">
+<meta itemprop="datePublished" content="2020-10-29T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-10-29T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1746">
+
+
+
+<meta itemprop="keywords" content="week10," />
+
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Object-oriented programming and methods"/>
+<meta name="twitter:description" content="
+
+
+
+
+Learning about object-oriented programming with R’s S3 object-oriented programming system.
+"/>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+
+	<link rel="stylesheet" href="/data_analysis_2020/css/style.css">
+	<link rel="stylesheet" href="/data_analysis_2020/css/custom.css">
+
+	<link rel="shortcut icon" href="/data_analysis_2020/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/data_analysis_2020/" title="Reproducible Data Analysis" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/data_analysis_2020/img/svalbard_sky.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Reproducible Data Analysis</div>
+					<div class="logo__tagline">Public site for UT-Knoxville MICR 493/593; GEOL 490/590</div>
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Object-oriented programming and methods</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-10-29T00:00:00Z">2020-10-29</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/data_analysis_2020/categories/base-r/" rel="category">base R</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<div id="understanding-oop" class="section level1">
+<h1>Understanding OOP</h1>
+<p>Writing functions allows you to transform data in new and interesting ways. In many cases, you might want to create a new kind of data structure to hold those transformed structures.</p>
+<p>Object classes allow you to do that. You have already run into classes: data frames, atomic vectors, and <code>lm</code> objects are all examples of different classes of objects.</p>
+<p>In R, all objects belong to a class. We can determine the class using the <code>class()</code> function. For instance:</p>
+<pre class="r"><code>m &lt;- lm(mpg ~ wt, data = mtcars)
+class(m)</code></pre>
+<pre><code>## [1] &quot;lm&quot;</code></pre>
+<p>Classes are an aspect of the <strong>object-oriented programming</strong> (OOP) paradigm. OOP code is based around <em>objects</em> (think of nouns) and <em>methods</em> (think of verbs).</p>
+</div>
+<div id="rs-insane-oop-systems" class="section level1">
+<h1>R’s insane OOP systems</h1>
+<p>Because we all did something wrong in a past life, R has not one but at least four sets of OOP systems: <strong>S3</strong>, <strong>S4</strong>, and <strong>R6</strong>, and <strong>Reference Classes</strong>. These all work differently. We’re going to talk about the <strong>S3</strong> system, which is (<a href="https://adv-r.hadley.nz/oo.html">arguably</a>) the most important. It is certainly the easiest to understand, and probably the one you will run into most often.</p>
+<div id="nested-classes-and-inheritance-the-biological-model" class="section level2">
+<h2>Nested classes and inheritance: The biological model</h2>
+<p>In S3, as well as virtually every OOP system, classes can contain subclasses. For an example, let’s look at <strong>tibbles</strong>, which are the tidyverse’s version of data frame.</p>
+<pre class="r"><code>library(tidyverse)
+mt_tibble &lt;- as_tibble(mtcars)
+class(mt_tibble)</code></pre>
+<pre><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<p>When we turn the <code>mt_cars</code> data frame into a tibble, we see that it now belongs to 3 classes: <code>tbl_df</code>, <code>tbl</code>, and <code>data.frame</code>. These are “nested” within each other: <code>tbl_df</code> is a subclass of <code>tbl</code>, and <code>tbl</code> is a subclass of <code>data.frame</code>.</p>
+<p>I think of these subclasses as working a bit like biological taxa. For instance, a wolf is a member of the “subclass” (genus) <em>Canis</em> (dogs, wolves, etc.), which is a “subclass” of the order <em>Carnivora</em> (cats, dogs, seals, and a bunch of other mostly-carnivorous mammals), which is a subclass of mammals.</p>
+<p>Biological taxa inherit the characteristics of their parent taxa. For instance, members of the “mammal” class have fur or hair, are warm-blooded, and feed their young with milk. (Let’s not worry too much about the weird exceptions like platypuses, because biology has a way of screwing up any classification system we impose on it). The <em>Carnivora</em> have all of the traits of the mammals, plus a <a href="https://en.wikipedia.org/wiki/Carnivora#Anatomy_and_physiology">few more</a>: large, conical front teeth and (ususally) a carnivorous diet. Wolves have all of those traits, plus the various features that allow us to distinguish a wolf from, say, a fox.</p>
+<p>OOP classes behave the same way: a subclass has all of the features of its parent class, plus potentially some more distinguishing features. A “tibble” (<code>tbl_df</code>) has all of the features of a data frame (it has columns which are atomic vectors, each vector is the same length), plus some others (it can’t have row names). See the <code>tibble</code> vignette (<code>vignette("tibble")</code>) or <a href="https://r4ds.had.co.nz/tibbles.html">R for Data Science</a> for more about tibbles, but the point is this: subclasses <em>inherit</em> their features from their parent classes.</p>
+</div>
+</div>
+<div id="methods-capabilities-of-classes" class="section level1">
+<h1>Methods: Capabilities of classes</h1>
+<p>What is the point of an object belonging to a class? In R, the main point has to do with <strong>generics</strong> (short for <em>generic functions</em>) and <strong>methods</strong>.</p>
+<p>A generic is a function that behaves differently depending on what class of object is passed to it. The fancy computer science name for this behavior is <em>polymorphism</em>. Consider <code>summary()</code>: it does a totally different thing when you call it on a factor vs on a numeric vector. For instance, compare</p>
+<pre class="r"><code>summary(diamonds$color)</code></pre>
+<pre><code>##     D     E     F     G     H     I     J 
+##  6775  9797  9542 11292  8304  5422  2808</code></pre>
+<p>vs</p>
+<pre class="r"><code>summary(diamonds$carat)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  0.2000  0.4000  0.7000  0.7979  1.0400  5.0100</code></pre>
+<p>The reason is that <code>summary()</code> is a generic function. When we call <code>summary()</code>, R internally figures out the class of the object that was passed to it, and then <em>dispatches</em> the appropriate function for that class. We call those functions, which are implementations of generic functions for a specific class, <strong>methods</strong>.</p>
+<p>In R, methods have a very straightforward naming convention: they are named as the generic name, followed by a <code>.</code>, followed by the name of the class. So for instance the method for creating a summary of a factor is <code>summary.factor()</code>. The method for creating a summary of an <code>lm</code> object is <code>summary.lm()</code>. We can get help on them accordingly: try <code>?summary.lm</code>.</p>
+<div id="watching-method-dispatch" class="section level3">
+<h3>Watching method dispatch</h3>
+<p>When we pass an object to a generic function, R has to figure out which method to use. It looks for a method for most specific class. If it finds one, it uses it. If not, it looks for the next most specific class, and so on. If it never finds a method, it uses the <em>default</em> method.</p>
+<p>The R package <strong>sloop</strong> is designed to help us understand R objects and their methods. (The name is meant to evoke “sailing the seas of OOP”, which is a rather lovely image). It allows us to see the process of method dispatch for a function call:</p>
+<pre class="r"><code>sloop::s3_dispatch(print(diamonds))</code></pre>
+<pre><code>##    print.tbl_df
+## =&gt; print.tbl
+##  * print.data.frame
+##  * print.default</code></pre>
+<p>Here, <code>=&gt;</code> indicates a method exists and is used. <code>*</code> indicates that a method exists but is not used, and the result appears gray if the method does not exist. For instance, <code>tbl_df</code> is the most specific class that <code>diamonds</code> belongs to, so when we call <code>print(diamonds)</code>, R first checks for a method called <code>print.tbl_df()</code>, finds that it exists, and uses it. <code>sloop::s3_dispatch()</code> helpfully informs us that there are also <code>print()</code> methods for the <code>tbl</code> and <code>data.frame</code> classes, as well as a default <code>print()</code> method.</p>
+<p>We see slightly different behavior for a numeric vector:</p>
+<pre class="r"><code>sloop::s3_dispatch(print(diamonds$price))</code></pre>
+<pre><code>##    print.integer
+##    print.numeric
+## =&gt; print.default</code></pre>
+<p><code>diamonds$price</code> is a vector of integers, so when we try to <code>print()</code> it, R first checks for a specific <code>print.integer()</code> method, and finds that it does not exist. It nexts checks for <code>print.numeric()</code>, which also does not exist, and then finally settles on the default print method.</p>
+<p>Another very useful function in <strong>sloop</strong> is <code>s3_methods_class()</code>, which lists all of the methods associated with a particular class:</p>
+<pre class="r"><code>sloop::s3_methods_class(&quot;ggplot&quot;)</code></pre>
+<pre><code>## # A tibble: 4 x 4
+##   generic      class  visible source             
+##   &lt;chr&gt;        &lt;chr&gt;  &lt;lgl&gt;   &lt;chr&gt;              
+## 1 ggplot_build ggplot FALSE   registered S3method
+## 2 plot         ggplot FALSE   registered S3method
+## 3 print        ggplot FALSE   registered S3method
+## 4 summary      ggplot FALSE   registered S3method</code></pre>
+<p><code>ggplot</code> objects have four methods associated with them <code>ggplot_build()</code>, <code>plot</code>, <code>print</code>, and <code>summary</code>.</p>
+</div>
+</div>
+<div id="creating-classes-and-methods" class="section level1">
+<h1>Creating classes and methods</h1>
+<p>Often when we are writing code, particularly when we are writing packages, it will be useful to define our own classes, as well as methods to go along with those classes. For instance, imagine that we are writing a package to automate analysis from a specific instrument in our lab. We might want to create a class to hold all the relevant output from that instrument, which might include multiple types of raw data, plus information about the experiment, etc.</p>
+<p>Changing the class of an object is really easy: we use the <code>class()</code> function:</p>
+<pre class="r"><code>mtcars_new &lt;- mtcars
+class(mtcars_new) &lt;- &quot;lm&quot;</code></pre>
+<p>Voila! We have just changed the class of <code>mtcars</code> from <code>data.frame</code> to <code>lm</code>. Actually, we have just changed the value of <code>mtcars_new</code>’s class object to “lm”. This is very much like just smacking a “Hello, my class is lm” nametag on our object, without doing anything else.</p>
+<p>Of course, this is fairly dangerous. If I point at my guinea pigs and say “I declare you to be horses!”, they won’t mind. However, if I try to put a saddle on them, bad things will happen.</p>
+<p>Similarly, just because I just declared <code>mtcars_new</code> to be of the <code>lm</code> class, doesn’t mean it will behave like a properly structured <code>lm</code> object. To wit:</p>
+<pre class="r"><code>print(mtcars_new)</code></pre>
+<pre><code>## 
+## Call:
+## NULL
+## 
+## No coefficients</code></pre>
+<div id="writing-constructor-functions" class="section level2">
+<h2>Writing constructor functions</h2>
+<p>To avoid this kind of problem, we want to create classes using a <a href="https://adv-r.hadley.nz/s3.html#s3-constructor"><strong>constructor</strong> function</a>. Constructor functions exist to create objects belonging to specific classes. They should always do three things:</p>
+<ul>
+<li>have a name of the form <code>new_classname()</code></li>
+<li>have one argument for the base object, and one for each attribute that will be assigned to the base object (more on what this means later)</li>
+<li>check that all of the arguments are of an appropriate type</li>
+</ul>
+<p>Imagine, for instance, we are creating a class for raw data produced by our lab instrument, which is called a <a href="https://rebigulator.org/">rebigulator</a>. We might call the class for this raw data <code>rebig_raw</code>. Thus, our constructor function would be called <code>new_rebig_raw()</code>. It might look like this:</p>
+<pre class="r"><code>new_rebig_raw &lt;- function(df, analyst) {
+  stopifnot(is.data.frame(df))
+  stopifnot(is.character(analyst))
+  
+  attr(df, &quot;analyst&quot;) &lt;- analyst
+  structure(df, class = c(&quot;rebig_raw&quot;, &quot;data.frame&quot;))
+}</code></pre>
+<p>Here, we have made <code>rebig_raw</code> a subclass of <code>data.frame</code>. Thus, all the methods that work on data frames will work on <code>rebig_raw</code> objects.</p>
+</div>
+<div id="writing-methods" class="section level2">
+<h2>Writing methods</h2>
+<p>However, we probably want to create some special methods. Since a <code>rebig_raw</code> object is just a data frame with an “author” attribute, we probably want the <code>summary</code> method to print the author name as well as the summary of the data. We can simply write a function called <code>summary.rebig_raw()</code>, like so:</p>
+<pre class="r"><code>summary.rebig_raw &lt;- function(rebig_obj) {
+  print(paste0(&quot;Analyst: &quot;, attr(rebig_obj, &quot;analyst&quot;), sep = &quot; &quot;))
+  df_summ &lt;- summary.data.frame(rebig_obj)
+  df_summ
+}
+my_rebig_obj &lt;- new_rebig_raw(mtcars, analyst = &quot;Drew&quot;)
+summary(my_rebig_obj)</code></pre>
+<pre><code>## [1] &quot;Analyst: Drew &quot;</code></pre>
+<pre><code>##       mpg             cyl             disp             hp       
+##  Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  
+##  1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  
+##  Median :19.20   Median :6.000   Median :196.3   Median :123.0  
+##  Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  
+##  3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  
+##  Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  
+##       drat             wt             qsec             vs        
+##  Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  
+##  1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  
+##  Median :3.695   Median :3.325   Median :17.71   Median :0.0000  
+##  Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  
+##  3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  
+##  Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  
+##        am              gear            carb      
+##  Min.   :0.0000   Min.   :3.000   Min.   :1.000  
+##  1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  
+##  Median :0.0000   Median :4.000   Median :2.000  
+##  Mean   :0.4062   Mean   :3.688   Mean   :2.812  
+##  3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  
+##  Max.   :1.0000   Max.   :5.000   Max.   :8.000</code></pre>
+<p>There are many more intricacies to creating <em>good-quality</em> classes and associated methods, many of which can be found in advanced R, but this primer will get you started with the basics.</p>
+</div>
+</div>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/data_analysis_2020/tags/week10/" rel="tag">week10</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/data_analysis_2020/notes/lists/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Lists</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Andrew D. Steen.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/data_analysis_2020/js/menu.js"></script>
+<script src="/data_analysis_2020/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

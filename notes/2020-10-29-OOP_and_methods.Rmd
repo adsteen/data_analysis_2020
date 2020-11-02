@@ -3,8 +3,8 @@ title: 'Object-oriented programming and methods'
 author: ~
 date: '2020-10-29'
 slug: OOP-and-methods
-categories: [dplyr]
-tags: [week08]
+categories: [base R]
+tags: [week10]
 draft: no
 ---
 
